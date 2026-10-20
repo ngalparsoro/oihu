@@ -86,24 +86,36 @@
     const col = (a) => ramp(RD, (a + 2) / 4);
     const TEMP = nf({ minimumFractionDigits: 1, maximumFractionDigits: 1 });
     const w = 1000 / N;
-    // two shapes for the same bars: centred (reading the year) or rising and falling from the average line (comparing)
-    const centred = (a) => { const h = 18 + 128 * (a - lo) / (hi - lo); return [75 - h / 2, h]; };
-    const fromBase = (a) => { const h = Math.max(1.5, 68 * Math.abs(a) / far); return a >= 0 ? [75 - h, h] : [75, h]; };
-    let series = C.mean, cur = -1, city = pick.options[0].textContent, playing = false, mode = 'read', blend = 0;
+    // three shapes for the same bars: a plain line of colours (seeing), centred heights (reading) and rising or
+    // falling from the 1940–1970 line (comparing)
+    const ATTR = ['x', 'y', 'width', 'height', 'rx'];
+    const shape = (m, a, i) => {
+      if (m === 'see') return [i * w, 4, w + .6, 142, 0];
+      const h = m === 'cmp' ? Math.max(1.5, 68 * Math.abs(a) / far) : 18 + 128 * (a - lo) / (hi - lo);
+      return [i * w + w * .18, m === 'cmp' ? (a >= 0 ? 75 - h : 75) : 75 - h / 2, w * .64, h, w * .32];
+    };
+    let series = C.mean, cur = -1, city = pick.options[0].textContent, playing = false, mode = 'read';
     Object.keys(C.cities).forEach((c) => { el('option', null, c, pick).value = c; });
     const baseT = () => (pick.value ? C.baseT[pick.value] : C.baseT.mean);
 
     const base = sv('line', { x1: 0, x2: 1000, y1: 75, y2: 75, class: 'base', opacity: 0 }, svg);
     const rects = series.map((a, i) => {
-      const g = centred(a);
-      return sv('rect', { x: (i * w + w * .18).toFixed(2), y: g[0].toFixed(2), width: (w * .64).toFixed(2), height: g[1].toFixed(2), rx: (w * .32).toFixed(2), fill: col(a), style: 'animation-delay:' + (i * 9) + 'ms' }, svg);
+      const attrs = { fill: col(a), style: 'animation-delay:' + (i * 9) + 'ms' };
+      shape(mode, a, i).forEach((v, j) => { attrs[ATTR[j]] = v.toFixed(2); });
+      return sv('rect', attrs, svg);
     });
-    const setBar = (r, a) => {
-      const g0 = centred(a), g1 = fromBase(a);
-      r.setAttribute('y', (g0[0] + (g1[0] - g0[0]) * blend).toFixed(2));
-      r.setAttribute('height', (g0[1] + (g1[1] - g0[1]) * blend).toFixed(2));
-      r.setAttribute('fill', col(a));
-    };
+    // every bar moves from where it is to the shape of the current mode and series; the colours follow the values
+    function morph(from, ms) {
+      const start = rects.map((r) => ATTR.map((n) => +r.getAttribute(n))), end = series.map((a, i) => shape(mode, a, i));
+      const op0 = +base.getAttribute('opacity'), op1 = mode === 'cmp' ? 1 : 0;
+      tween(ms, (k) => {
+        rects.forEach((r, i) => {
+          ATTR.forEach((n, j) => r.setAttribute(n, (start[i][j] + (end[i][j] - start[i][j]) * k).toFixed(2)));
+          r.setAttribute('fill', col(from[i] + (series[i] - from[i]) * k));
+        });
+        base.setAttribute('opacity', op0 + (op1 - op0) * k);
+      });
+    }
     const idle = () => { now.textContent = mode === 'cmp' ? '— ' + T.clima.base : ''; };
 
     function show(i, force) {
@@ -138,9 +150,9 @@
     pick.addEventListener('change', () => {
       if (playing) stop();
       city = pick.options[pick.selectedIndex].textContent;
-      const from = series.slice(), to = pick.value ? C.cities[pick.value] : C.mean;
-      series = to;
-      tween(450, (k) => rects.forEach((r, i) => setBar(r, from[i] + (to[i] - from[i]) * k)));
+      const from = series;
+      series = pick.value ? C.cities[pick.value] : C.mean;
+      morph(from, 450);
       if (cur >= 0) show(cur, true);
     });
 
@@ -198,16 +210,16 @@
     }
     btn.addEventListener('click', () => (playing ? stop() : start()));
 
-    // the ways above the waveform ("see it" only explains the colours): read, compare, hear
+    // the ways above the waveform: see (only the colours), read, compare, hear
     const ways = Array.prototype.slice.call(document.querySelectorAll('button.way'));
     function setMode(m) {
       mode = m;
       ways.forEach((b) => { if (b.dataset.way !== 'hear') b.classList.toggle('on', b.dataset.way === m); });
-      const from = blend, to = m === 'cmp' ? 1 : 0;
-      tween(450, (k) => { blend = from + (to - from) * k; base.setAttribute('opacity', blend); rects.forEach((r, i) => setBar(r, series[i])); });
+      morph(series, 450);
       if (cur >= 0) show(cur, true); else idle();
     }
     const WAYS = {
+      see: () => { if (playing) stop(); setMode('see'); show(-1); },
       read: () => {
         if (playing) stop();
         setMode('read');
