@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Oihu Data Solutions · Datos e inteligencia artificial aplicada · Gipuzkoa</title>
+<meta name="description" content="Convertimos información dispersa en plataformas de datos, sistemas de gestión con agentes de IA y paneles para la industria: herramientas que se entienden y se usan, conectadas a lo que ya tienes.">
+<link rel="canonical" href="https://ngalparsoro.github.io/oihu/es/">
+<link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/">
+<link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/">
+<link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/">
+<link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preload" href="../fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/newsreader-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/public-sans.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oihu Data Solutions">
+<meta property="og:title" content="Oihu Data Solutions · Voz a los datos">
+<meta property="og:description" content="Convertimos información dispersa en plataformas de datos, sistemas de gestión con agentes de IA y paneles para la industria: herramientas que se entienden y se usan, conectadas a lo que ya tienes.">
+<meta property="og:url" content="https://ngalparsoro.github.io/oihu/es/">
+<meta property="og:image" content="https://ngalparsoro.github.io/oihu/img/og-es.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Voz a los datos · Oihu Data Solutions">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="eu_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://ngalparsoro.github.io/oihu/#org", "name": "Oihu Data Solutions", "url": "https://ngalparsoro.github.io/oihu/", "logo": "https://ngalparsoro.github.io/oihu/img/oihu-avatar.png", "description": "Convertimos información dispersa en plataformas de datos, sistemas de gestión con agentes de IA y paneles para la industria: herramientas que se entienden y se usan, conectadas a lo que ya tienes.", "areaServed": "Euskal Herria", "address": {"@type": "PostalAddress", "addressRegion": "Gipuzkoa"}, "knowsLanguage": ["eu", "es", "en"]}, {"@type": "WebSite", "@id": "https://ngalparsoro.github.io/oihu/#web", "url": "https://ngalparsoro.github.io/oihu/", "name": "Oihu Data Solutions", "publisher": {"@id": "https://ngalparsoro.github.io/oihu/#org"}}]}</script>
+<style>
+@font-face{font-family:'Newsreader Oihu';font-style:normal;font-display:swap;font-weight:200 800;src:url(../fonts/newsreader.woff2) format('woff2')}
+@font-face{font-family:'Newsreader Oihu';font-style:italic;font-display:swap;font-weight:200 800;src:url(../fonts/newsreader-italic.woff2) format('woff2')}
+@font-face{font-family:'Public Sans Oihu';font-style:normal;font-display:swap;font-weight:100 900;src:url(../fonts/public-sans.woff2) format('woff2')}
+
+/* Layout: one calm, editorial page read top to bottom — a serif headline over the climate waveform, three service rows that alternate text and video, then how / who / team, closing on a navy contact band. Navy carries the text, teal marks what matters, sand marks team work. */
+:root{
+  --paper:#F8F9FA;--surface:#FFFFFF;--ink:#021B2E;--ink-2:#3D5266;--ink-3:#5F7081;--line:#DCE3EA;--line-2:#C3CED8;
+  --accent:#12808A;--accent-ink:#0E6870;--accent-soft:#E3F1F1;
+  --sand:#D9C9A8;--sand-ink:#6E5A36;--sand-soft:#F3EEE3;
+  --band:#021B2E;--band-ink:#EEF3F7;--band-ink-2:#A9B8C6;--band-line:#1C3850;--band-accent:#4FB9BF;
+  --shadow:0 1px 2px rgba(2,27,46,.06),0 22px 44px -26px rgba(2,27,46,.5);
+  --serif:'Newsreader Oihu','Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Public Sans Oihu','Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --maxw:1160px;--radius:12px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#06131F;--surface:#0C1D2B;--ink:#EEF3F7;--ink-2:#A9B8C6;--ink-3:#8A9BAC;--line:#1B2F40;--line-2:#2A4157;
+  --accent:#4FB9BF;--accent-ink:#6CCBD0;--accent-soft:#0F2E33;
+  --sand:#CDBB94;--sand-ink:#DCCDAE;--sand-soft:#24211A;
+  --band:#0B1D2C;--band-ink:#EEF3F7;--band-ink-2:#A9B8C6;--band-line:#1D3448;--band-accent:#4FB9BF;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 22px 44px -26px rgba(0,0,0,.8);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#06131F;--surface:#0C1D2B;--ink:#EEF3F7;--ink-2:#A9B8C6;--ink-3:#8A9BAC;--line:#1B2F40;--line-2:#2A4157;
+  --accent:#4FB9BF;--accent-ink:#6CCBD0;--accent-soft:#0F2E33;
+  --sand:#CDBB94;--sand-ink:#DCCDAE;--sand-soft:#24211A;
+  --band:#0B1D2C;--band-ink:#EEF3F7;--band-ink-2:#A9B8C6;--band-line:#1D3448;--band-accent:#4FB9BF;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 22px 44px -26px rgba(0,0,0,.8);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0}img,video{max-width:100%}[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:500;font-optical-sizing:auto;letter-spacing:-.012em;line-height:1.06;margin:0;text-wrap:balance}
+h1 em,h2 em,h3 em{font-style:italic;color:var(--accent)}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 12.5px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+::selection{background:var(--accent-soft)}
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.3) blur(12px);-webkit-backdrop-filter:saturate(1.3) blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;min-height:68px}
+.logo{display:flex;align-items:center;flex:0 0 auto;text-decoration:none;--lm:var(--accent);--lw:var(--ink);--ld:var(--ink-2)}
+.logo svg{height:34px;width:auto;display:block;overflow:visible}
+.nav{display:flex;gap:26px;margin-left:auto;font-size:15px}
+.nav a{text-decoration:none;color:var(--ink-2);padding-block:6px;border-bottom:1px solid transparent}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--line-2)}
+.langs{display:flex;gap:2px;flex:0 0 auto}
+.langs a{font:600 12.5px/1 var(--sans);letter-spacing:.08em;color:var(--ink-3);text-decoration:none;border-bottom:2px solid transparent;padding:8px 7px 6px}
+.langs a:hover{color:var(--ink)}
+.langs a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}
+/* the other-language hint, shown only when the browser asks for a language this page is not in */
+.suggest{background:var(--accent-soft);border-bottom:1px solid var(--line)}
+.suggest .wrap{display:flex;align-items:center;justify-content:center;gap:14px;min-height:40px;font-size:14.5px}
+.suggest a{color:var(--accent-ink);font-weight:600;text-underline-offset:3px}
+.suggest button{font:400 20px/1 var(--sans);color:var(--ink-3);background:none;border:0;padding:4px 8px;cursor:pointer}
+.suggest button:hover{color:var(--ink)}
+@media (max-width:900px){.nav{display:none}.langs{margin-left:auto}}
+@media (max-width:420px){.logo svg{height:30px}}
+/* hero */
+.hero .wrap{padding-block:clamp(56px,9vw,112px) clamp(28px,4vw,44px);display:grid;gap:24px}
+#services .wrap{padding-top:clamp(48px,6vw,72px)}
+.slogan{font-size:clamp(54px,9vw,116px);line-height:.98;letter-spacing:-.022em}
+.others{display:flex;flex-wrap:wrap;gap:2px 0;margin-top:-8px;font:italic 400 clamp(18px,1.7vw,21px)/1.4 var(--serif);color:var(--ink-3)}
+.others span+span:before{content:"·";margin:0 .55em;color:var(--line-2);font-style:normal}
+.lead{font-size:clamp(19px,1.85vw,22px);line-height:1.55;max-width:37em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;border:1px solid var(--line-2);text-decoration:none;font:600 15.5px/1 var(--sans);color:var(--ink);background:var(--surface);transition:background-color .15s,border-color .15s,color .15s}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
+.wave{margin:22px 0 0;display:grid;gap:12px}
+.wavebox{background:var(--band);border-radius:var(--radius);padding:clamp(16px,2.4vw,28px) clamp(16px,2.6vw,30px) clamp(12px,1.6vw,16px)}
+.wave svg{width:100%;height:clamp(84px,12vw,136px);display:block}
+.wave rect{transform-box:fill-box;transform-origin:50% 50%;animation:grow .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes grow{from{transform:scaleY(.25);opacity:.4}to{transform:scaleY(1);opacity:1}}
+.wyears{display:flex;justify-content:space-between;margin-top:10px;font:500 12px/1 var(--sans);letter-spacing:.06em;color:var(--band-ink-2);font-variant-numeric:tabular-nums}
+.wave figcaption{font-size:13.5px;line-height:1.5;color:var(--ink-3);max-width:62em}
+.name{max-width:42em;font:400 clamp(18px,1.6vw,20px)/1.55 var(--serif);color:var(--ink-2);border-left:2px solid var(--sand);padding-left:18px;margin-top:6px}
+.name b{color:var(--ink);font-weight:600}
+/* sections */
+section{scroll-margin-top:76px}
+.sec .wrap{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(32px,4.5vw,56px);max-width:44em}
+.sec-head h2{font-size:clamp(34px,4.4vw,54px)}
+.sec-head p:not(.eyebrow){color:var(--ink-2);font-size:18.5px;line-height:1.6}
+/* services */
+.svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.28fr);gap:clamp(28px,4.5vw,64px);align-items:start;padding-block:clamp(36px,5vw,60px);border-top:1px solid var(--line)}
+.svc:nth-of-type(even){grid-template-columns:minmax(0,1.28fr) minmax(0,1fr)}
+.svc:nth-of-type(even) .media{order:-1}
+.svc .txt{display:grid;gap:16px;min-width:0}
+.kick{display:flex;align-items:baseline;gap:12px;font:600 12.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.kick .num{font:italic 500 24px/1 var(--serif);letter-spacing:0;color:var(--accent);text-transform:none}
+.svc h3{font-size:clamp(30px,3.4vw,42px)}
+.svc h3+p{color:var(--ink-2)}
+.svc ul{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:8px}
+.svc li{position:relative;padding-left:26px}
+.svc li:before{content:"";position:absolute;left:3px;top:.6em;width:11px;height:6px;border-left:1.75px solid var(--accent);border-bottom:1.75px solid var(--accent);transform:rotate(-45deg) translateY(-3px)}
+.cases{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.case{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;background:var(--surface);border:1px solid var(--line);font:500 14.5px/1.2 var(--sans);text-decoration:none;color:var(--ink)}
+a.case:hover{border-color:var(--accent)}
+.case svg{width:11px;height:11px;flex:0 0 11px;color:var(--ink-3)}
+a.case:hover svg{color:var(--accent)}
+.case small{font:600 11.5px/1 var(--sans);letter-spacing:.02em;padding:5px 8px;border-radius:999px;white-space:nowrap}
+.st-ok{background:var(--accent-soft);color:var(--accent-ink)}
+.st-team{background:var(--sand-soft);color:var(--sand-ink)}
+.credit{font-size:14.5px;line-height:1.6;color:var(--ink-2);background:var(--sand-soft);border-radius:10px;padding:14px 16px}
+.media{min-width:0}
+.player{position:relative;border-radius:var(--radius);overflow:hidden;background:#0B1620;aspect-ratio:16/9;box-shadow:var(--shadow)}
+.player video{position:absolute;inset:0;width:100%;height:100%;display:block;background:#0B1620}
+.play{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;border:0;background:#FFFFFF;color:#021B2E;font:600 15px/1 var(--sans);cursor:pointer;box-shadow:0 10px 28px -12px rgba(0,0,0,.7);transition:transform .15s}
+.play:hover{transform:translateY(-1px)}
+.play svg{width:28px;height:28px;flex:0 0 28px}
+.play em{font:500 13px/1 var(--sans);font-style:normal;color:#5F7081;font-variant-numeric:tabular-nums}
+.vnote{margin-top:12px;font-size:13.5px;color:var(--ink-3)}
+@media (max-width:860px){.svc,.svc:nth-of-type(even){grid-template-columns:minmax(0,1fr)}.svc:nth-of-type(even) .media{order:0}}
+@media (max-width:520px){.play{left:12px;bottom:12px;gap:8px;padding:6px 13px 6px 6px;font-size:14px}.play svg{width:24px;height:24px;flex-basis:24px}}
+/* how */
+.how{background:var(--surface);border-block:1px solid var(--line)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.8vw,36px)}
+.pr{display:grid;gap:10px;align-content:start;padding-top:18px;border-top:1px solid var(--line-2)}
+.pr .n{font:italic 500 26px/1 var(--serif);color:var(--accent)}
+.pr h3{font-size:clamp(23px,2.2vw,27px);line-height:1.15}
+.pr p{color:var(--ink-2);font-size:16px;line-height:1.6}
+@media (max-width:980px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:540px){.grid4{grid-template-columns:minmax(0,1fr)}}
+/* who */
+.who-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.who-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr);gap:6px 36px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.who-list b{font:500 clamp(22px,2.3vw,27px)/1.18 var(--serif);letter-spacing:-.01em}
+.who-list span{color:var(--ink-2)}
+@media (max-width:640px){.who-list li{grid-template-columns:minmax(0,1fr)}}
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,32px)}
+.person{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.mono{width:60px;height:60px;border-radius:50%;background:var(--sand-soft);color:var(--ink);display:flex;align-items:center;justify-content:center;font:500 22px/1 var(--serif);letter-spacing:.02em}
+.person h3{font-size:27px;line-height:1.15}
+.role{margin-top:8px;font:600 12px/1.35 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.bio{margin-top:12px;color:var(--ink-2);font-size:16px;line-height:1.6}
+@media (max-width:860px){.team{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.person{grid-template-columns:minmax(0,1fr);padding:22px}}
+/* contact */
+.contact{background:var(--band);color:var(--band-ink)}
+.contact .wrap{padding-block:clamp(64px,9vw,112px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:end}
+.contact .eyebrow{color:var(--band-accent)}
+.contact h2{font-size:clamp(50px,8vw,100px);line-height:.98;letter-spacing:-.02em;margin-top:14px}
+.contact p{color:var(--band-ink-2);font-size:18px;line-height:1.6;margin-top:18px;max-width:30em}
+.contact dl{margin:0;display:grid;border-top:1px solid var(--band-line)}
+.contact dl div{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:16px;padding:15px 0;border-bottom:1px solid var(--band-line)}
+.contact dt{font:600 12px/1.6 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--band-ink-2);padding-top:2px}
+.contact dd{margin:0;font-size:17px;min-width:0;overflow-wrap:anywhere}
+.contact dd a{text-decoration-color:var(--band-accent);text-underline-offset:3px}
+.contact dd .soon{color:var(--band-ink-2);font:italic 400 18px/1.4 var(--serif)}
+@media (max-width:860px){.contact .wrap{grid-template-columns:minmax(0,1fr)}}
+/* footer */
+.foot{background:var(--band);color:var(--band-ink-2);border-top:1px solid var(--band-line)}
+.foot .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:14px 32px;align-items:center;justify-content:space-between;font-size:14px}
+.foot .logo{--lm:var(--band-accent);--lw:var(--band-ink);--ld:var(--band-ink-2)}
+.foot .logo svg{height:30px}
+.foot .slo{font:italic 400 16px/1.4 var(--serif)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wave rect{animation:none}.btn,.play{transition:none}}
+</style>
+</head>
+<body>
+<div class="suggest" id="suggest" hidden><div class="wrap"><a id="suggest-a" href=""></a><button type="button" id="suggest-x">×</button></div></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="oihu-logo" viewBox="0 0 10017 2390"><path style="fill:var(--lm,#12808A)" d="M1077 2390C962 2390 848 2371 740 2335C631 2300 528 2247 436 2178C344 2110 264 2028 197 1934C131 1841 81 1737 47 1628C14 1518 -2 1404 0 1289C3 1175 24 1061 62 953C140 732 122 419 157 107C167 20 262 -27 338 17C391 48 441 94 490 139C584 226 674 308 780 278C828 264 877 254 927 247C977 240 1027 236 1077 236C1127 236 1177 240 1227 247C1276 254 1325 264 1374 278C1480 308 1570 226 1664 139C1712 94 1762 48 1816 17C1891 -27 1987 20 1997 107C2032 419 2013 732 2092 953C2130 1061 2151 1175 2153 1289C2156 1404 2140 1518 2106 1628C2073 1737 2022 1841 1956 1934C1890 2028 1809 2110 1717 2178C1625 2247 1523 2300 1414 2335C1305 2371 1191 2390 1077 2390ZM1714 1297C1714 945 1429 660 1077 660C725 660 439 945 439 1297C439 1649 725 1935 1077 1935C1429 1935 1714 1649 1714 1297Z"/><path style="fill:var(--lw,#021B2E)" d="M3410 51Q3254 51 3123 103Q2991 155 2895 250Q2799 346 2746 477Q2693 608 2693 765Q2693 922 2744 1052Q2795 1181 2889 1274Q2982 1368 3110 1418Q3238 1469 3391 1469Q3548 1469 3679 1417Q3810 1365 3906 1269Q4002 1174 4055 1043Q4108 912 4108 754Q4108 597 4057 468Q4006 339 3913 245Q3820 152 3692 101Q3564 51 3410 51ZM3411 1369Q3286 1369 3190 1293Q3094 1217 3041 1070Q2987 923 2987 709Q2987 525 3038 401Q3088 276 3179 214Q3270 151 3390 151Q3516 151 3611 227Q3707 302 3760 449Q3814 596 3814 811Q3814 995 3763 1119Q3713 1243 3622 1306Q3532 1369 3411 1369ZM5418 1409V1445H5920V1409L5791 1364V829Q5791 665 5727 586Q5662 507 5530 507Q5480 507 5435 516Q5391 525 5346 549Q5300 573 5248 616Q5219 641 5185 673V281L5195 0H5172L4778 103V135Q4817 156 4847 175Q4877 194 4898 211Q4920 228 4934 244V1364L4806 1409V1445H5313V1409L5185 1365V742Q5213 724 5251 711Q5307 691 5371 691Q5428 691 5465 708Q5502 725 5521 759Q5539 794 5539 845V1368ZM6342 1140V632L6353 515L5954 540V583L6091 641V1158Q6091 1313 6154 1390Q6216 1468 6346 1468Q6394 1468 6436 1459Q6478 1450 6521 1427Q6564 1405 6613 1363Q6638 1342 6666 1315L6679 1468H6703L7050 1400V1368Q7032 1362 7013 1353Q6994 1344 6975 1334Q6956 1324 6940 1314Q6924 1303 6914 1294V636L6928 515L6535 540V583L6662 638V1244Q6640 1257 6611 1267Q6559 1285 6500 1285Q6443 1285 6408 1271Q6374 1256 6358 1225Q6342 1193 6342 1140ZM4624 504H4596L4232 600V632Q4261 648 4287 665Q4313 682 4333 698Q4354 714 4366 728V1364L4238 1409V1445H4745V1409L4618 1365V700ZM4484 304Q4553 304 4594 260Q4636 215 4636 151Q4636 89 4594 46Q4553 3 4484 3Q4415 3 4373 46Q4331 89 4331 151Q4331 215 4373 260Q4415 304 4484 304Z"/><path style="fill:var(--ld,#3D5266)" d="M8569 2383Q8636 2383 8685 2353Q8735 2323 8761 2267Q8788 2211 8788 2132Q8788 2052 8761 1995Q8734 1939 8685 1908Q8636 1878 8569 1878Q8502 1878 8452 1908Q8402 1939 8375 1995Q8348 2052 8348 2132Q8348 2211 8375 2267Q8402 2323 8451 2353Q8501 2383 8569 2383ZM5971 2383Q6039 2383 6088 2353Q6137 2323 6164 2267Q6191 2211 6191 2132Q6191 2052 6164 1995Q6137 1939 6088 1908Q6038 1878 5971 1878Q5904 1878 5855 1908Q5805 1939 5778 1995Q5751 2052 5751 2132Q5751 2211 5778 2267Q5804 2323 5854 2353Q5904 2383 5971 2383ZM2693 2377H2821Q2909 2377 2967 2347Q3025 2318 3053 2262Q3081 2207 3081 2128Q3081 2053 3055 1999Q3028 1946 2972 1916Q2916 1887 2826 1886Q2810 1885 2789 1885Q2768 1885 2747 1885Q2726 1885 2712 1885Q2697 1885 2693 1885ZM9004 2377H9087V2016L9334 2377H9408V1885H9326V2236L9085 1885H9004ZM3240 2377H3324L3368 2253H3556L3600 2377H3683L3506 1885H3417ZM4267 2377H4350L4395 2253H4583L4627 2377H4710L4533 1885H4444ZM9826 2383Q9883 2383 9926 2365Q9969 2346 9993 2313Q10017 2280 10017 2237Q10017 2205 10005 2177Q9992 2150 9964 2131Q9936 2111 9890 2101L9799 2080Q9763 2072 9746 2056Q9728 2041 9728 2015Q9728 1987 9752 1966Q9775 1945 9824 1945Q9851 1945 9873 1953Q9896 1961 9910 1978Q9925 1996 9928 2025H10011Q10011 1985 9990 1952Q9968 1919 9927 1899Q9886 1879 9826 1879Q9774 1879 9732 1896Q9690 1914 9666 1946Q9641 1979 9641 2022Q9641 2061 9657 2088Q9672 2115 9700 2131Q9728 2147 9765 2156L9861 2179Q9896 2188 9915 2203Q9934 2218 9934 2245Q9934 2268 9919 2285Q9905 2301 9881 2309Q9858 2317 9831 2317Q9800 2317 9775 2308Q9750 2300 9734 2283Q9718 2265 9712 2241H9627Q9631 2276 9649 2303Q9667 2330 9695 2348Q9722 2365 9756 2374Q9790 2383 9826 2383ZM5372 2383Q5429 2383 5472 2365Q5515 2346 5539 2313Q5563 2280 5563 2237Q5563 2205 5551 2177Q5538 2150 5510 2131Q5482 2111 5436 2101L5345 2080Q5309 2072 5292 2056Q5274 2041 5274 2015Q5274 1987 5298 1966Q5321 1945 5370 1945Q5397 1945 5419 1953Q5442 1961 5456 1978Q5471 1996 5474 2025H5557Q5557 1985 5536 1952Q5514 1919 5473 1899Q5432 1879 5372 1879Q5320 1879 5278 1896Q5236 1914 5212 1946Q5187 1979 5187 2022Q5187 2061 5203 2088Q5218 2115 5246 2131Q5274 2147 5311 2156L5407 2179Q5442 2188 5461 2203Q5480 2218 5480 2245Q5480 2268 5465 2285Q5451 2301 5427 2309Q5404 2317 5377 2317Q5346 2317 5321 2308Q5296 2300 5280 2283Q5264 2265 5258 2241H5173Q5177 2276 5195 2303Q5213 2330 5241 2348Q5268 2365 5302 2374Q5336 2383 5372 2383ZM7096 2383Q7163 2383 7205 2361Q7247 2339 7266 2297Q7285 2255 7285 2197V1885H7201V2201Q7201 2239 7188 2264Q7175 2289 7152 2300Q7128 2312 7096 2312Q7048 2312 7020 2285Q6992 2258 6992 2201V1885H6907V2192Q6907 2253 6926 2295Q6944 2338 6986 2361Q7027 2383 7096 2383ZM8569 2314Q8529 2314 8500 2295Q8470 2276 8455 2236Q8439 2196 8439 2133Q8439 2068 8455 2027Q8470 1986 8500 1967Q8529 1948 8569 1948Q8609 1948 8638 1967Q8666 1986 8682 2027Q8698 2068 8698 2133Q8698 2196 8682 2236Q8667 2276 8638 2295Q8609 2314 8569 2314ZM5971 2314Q5931 2314 5902 2295Q5873 2276 5857 2236Q5841 2196 5841 2133Q5841 2068 5857 2027Q5873 1986 5902 1967Q5931 1948 5971 1948Q6011 1948 6040 1967Q6069 1986 6085 2027Q6100 2068 6100 2133Q6100 2196 6085 2236Q6070 2276 6041 2295Q6012 2314 5971 2314ZM2777 2308V1953H2824Q2877 1953 2915 1970Q2953 1988 2974 2026Q2994 2065 2994 2128Q2994 2194 2972 2234Q2950 2273 2911 2291Q2873 2308 2822 2308ZM7622 2377H7705V1959H7853V1885H7469V1959H7622ZM3936 2377H4019V1959H4167V1885H3783V1959H3936ZM6407 2377H6713V2305H6491V1885H6407ZM8049 2377H8132V1885H8049ZM3388 2180 3462 1965 3535 2180ZM4414 2180 4488 1965 4562 2180Z"/></symbol></svg>
+
+<header class="top"><div class="wrap">
+ <a class="logo" href="#top" aria-label="Oihu Data Solutions"><svg viewBox="0 0 10017 2390" aria-hidden="true"><use href="#oihu-logo"/></svg></a>
+ <nav class="nav" aria-label="Menu"><a href="#services">Servicios</a><a href="#how">Cómo trabajamos</a><a href="#who">Para quién</a><a href="#team">Equipo</a><a href="#contact">Contacto</a></nav>
+ <nav class="langs" aria-label="Hizkuntza · Idioma · Language"><a href="../" hreflang="eu">EU</a><a href="./" hreflang="es" aria-current="page">ES</a><a href="../en/" hreflang="en">EN</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+ <p class="eyebrow">Datos e inteligencia artificial aplicada · Gipuzkoa</p>
+ <h1 class="slogan">Voz a los <em>datos.</em></h1>
+ <p class="others"><span lang="eu">Datuei ahotsa.</span><span lang="en">A voice for data.</span></p>
+ <p class="lead">Convertimos información dispersa en plataformas de datos, sistemas de gestión con agentes de IA y paneles para la industria: herramientas que se entienden y se usan, conectadas a lo que ya tienes.</p>
+ <div class="ctas"><a class="btn primary" href="#services">Ver los servicios</a><a class="btn" href="#contact">Hablemos</a></div>
+ <figure class="wave"><div class="wavebox"><svg id="wave" viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-labelledby="wavecap"></svg><div class="wyears" aria-hidden="true"><span>1940</span><span>2025</span></div></div><figcaption id="wavecap">Euskal Herria 1940–2025: anomalía de la temperatura media anual, año a año. Datos ERA5, análisis propio.</figcaption></figure>
+ <p class="name"><b>Oihu</b>, en euskera, es la llamada que se hace en voz alta en la plaza. Es lo que hacemos con los datos: sacarlos de los archivos y hacer que se oigan.</p>
+</div></section>
+
+<section class="sec" id="services"><div class="wrap">
+ <div class="sec-head"><p class="eyebrow">Servicios</p><h2>Tres líneas, una misma forma de trabajar</h2><p>Nos conectamos a los datos que ya existen, sin romper nada, y los ponemos a trabajar.</p></div>
+
+ <article class="svc" id="svc-datos">
+  <div class="txt">
+   <p class="kick"><span class="num">01</span><span>Datos</span></p>
+   <h3>Plataformas y observatorios de datos</h3><p>Del dato oficial a mapas y webs que cualquiera puede explorar y compartir: elecciones, indicadores socioeconómicos, clima… Cada cifra se puede seguir hasta su fuente.</p>
+   <ul><li>Integración y verificación de fuentes oficiales</li><li>Mapas y gráficos interactivos, rápidos en el móvil</li><li>Webs en euskera, castellano y otros idiomas</li><li>Actualización automática con cada dato nuevo</li></ul>
+   <div class="cases"><a class="case" href="https://hautesbehatokia.eus" target="_blank" rel="noopener">Hauteskunde Behatokia <small class="st-ok">En línea</small><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5V8M9.3 2.7 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="case" href="https://nazioenbehatokia.eus" target="_blank" rel="noopener">Observatorio Electoral de las Naciones <small class="st-ok">En línea</small><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5V8M9.3 2.7 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="case">El clima de Euskal Herria</span></div>
+  </div>
+  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-datos-es.jpg" src="../video/datos-es.mp4" aria-label="Plataformas y observatorios de datos"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:36</em></button></div><p class="vnote">Los vídeos no tienen sonido; los textos están en pantalla.</p></div>
+ </article>
+
+ <article class="svc" id="svc-agentes">
+  <div class="txt">
+   <p class="kick"><span class="num">02</span><span>Agentes de IA</span></p>
+   <h3>Sistemas de gestión con agentes de IA</h3><p>Plataformas sencillas en las que los agentes leen documentos, responden sobre los datos, buscan y vigilan, mientras tu equipo decide. La IA propone; una persona valida.</p>
+   <ul><li>Plataforma de gestión a medida</li><li>Agentes que leen briefings, CV, PDF y correo</li><li>Consultas en lenguaje natural, con límites</li><li>Validación humana antes de cualquier acción</li></ul>
+   <div class="cases"><span class="case">MITÜMI <small class="st-team">En equipo</small></span><span class="case">JobScout</span></div>
+   <p class="credit">MITÜMI fue un reto de The Bridge para la agencia de eventos MITÜMI (julio de 2026), con 18 personas: 6 de Full Stack y 12 de Data Science e IA. Nora diseñó la plataforma con el equipo e integró los agentes, la API y el despliegue.</p>
+  </div>
+  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-agentes-es.jpg" src="../video/agentes-es.mp4" aria-label="Sistemas de gestión con agentes de IA"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:39</em></button></div></div>
+ </article>
+
+ <article class="svc" id="svc-planta">
+  <div class="txt">
+   <p class="kick"><span class="num">03</span><span>Industria</span></p>
+   <h3>Paneles de planta sobre el ERP</h3><p>Pantallas a medida para quien trabaja en planta, conectadas al ERP que ya existe: sin migraciones y sin tocar su configuración.</p>
+   <ul><li>Horas y saldos, para cada persona</li><li>El equipo de un vistazo, para responsables</li><li>Orden de fabricación y vales por célula</li><li>Se lee del ERP; lo nuevo se guarda aparte</li></ul>
+   <div class="cases"><span class="case">Control de horas <small class="st-ok">En uso en planta</small></span><span class="case">Panel de responsables <small class="st-ok">En uso en planta</small></span><span class="case">Panel de órdenes de fabricación</span></div>
+  </div>
+  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-planta-es.jpg" src="../video/planta-es.mp4" aria-label="Paneles de planta sobre el ERP"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:30</em></button></div></div>
+ </article>
+</div></section>
+
+<section class="sec how" id="how"><div class="wrap">
+ <div class="sec-head"><p class="eyebrow">Cómo trabajamos</p><h2>Cuatro decisiones que nos definen</h2></div>
+ <div class="grid4"><div class="pr"><span class="n" aria-hidden="true">01</span><h3>Trazable hasta la fuente</h3><p>Cada cifra publicada se puede seguir hasta el fichero oficial, con comprobaciones automáticas antes de publicar.</p></div><div class="pr"><span class="n" aria-hidden="true">02</span><h3>Sobre lo que ya existe</h3><p>Nos conectamos en solo lectura a tus datos y sistemas; lo nuevo se guarda aparte. Nada se rompe.</p></div><div class="pr"><span class="n" aria-hidden="true">03</span><h3>Personas al mando</h3><p>Los agentes proponen y una persona valida: nada con efecto real ocurre sin aprobación, en línea con el Reglamento europeo de IA.</p></div><div class="pr"><span class="n" aria-hidden="true">04</span><h3>Coste de pyme</h3><p>Webs estáticas y una IA que cuesta céntimos por consulta: en MITÜMI, la capa de IA se estimó en 6,70 € al mes.</p></div></div>
+</div></section>
+
+<section class="sec" id="who"><div class="wrap">
+ <div class="sec-head"><p class="eyebrow">Para quién</p><h2>Para organizaciones con datos que contar y procesos que aligerar</h2></div>
+ <ul class="who-list"><li><b>Instituciones públicas</b><span>Ayuntamientos, diputaciones, gobiernos y observatorios: datos territoriales, socioeconómicos y climáticos.</span></li><li><b>Servicios de empleo</b><span>Asistentes con IA para orientar a quien busca empleo, siempre con decisión humana.</span></li><li><b>Medios, demoscopia y consultoría</b><span>Datos electorales unificados, mapas y análisis para cada convocatoria.</span></li><li><b>Cultura y eventos</b><span>Gestión de festivales y entidades culturales: artistas, contratos, proveedores y subvenciones.</span></li><li><b>Industria</b><span>Paneles de producción sobre el ERP, documentos de planta y mantenimiento predictivo.</span></li></ul>
+</div></section>
+
+<section class="sec" id="team" style="padding-top:0"><div class="wrap">
+ <div class="sec-head"><p class="eyebrow">Equipo</p><h2>Dos socios, funciones complementarias</h2></div>
+ <div class="team">
+  <article class="person"><div class="mono" aria-hidden="true">NG</div><div><h3>Nora Galparsoro Larraza</h3><p class="role">Dirección técnica y de producto</p><p class="bio">Ingeniera técnica en Diseño Industrial y de Producto por Mondragon Unibertsitatea, con máster en Innovación Empresarial y Dirección de Proyectos. Más de diez años en la industria, de la oficina técnica a la línea de producción, y experiencia en gestión pública en el Ayuntamiento de Donostia. Data Science e IA en The Bridge (2026).</p></div></article>
+  <article class="person"><div class="mono" aria-hidden="true">IA</div><div><h3>Ion Ansa Mendizabal</h3><p class="role">Desarrollo de negocio y alianzas</p><p class="bio">Politólogo y director de una consultoría política, con una amplia red en el ámbito institucional, demoscópico y de los estudios socioeconómicos y climáticos. Dirige el Observatorio Electoral de las Naciones.</p></div></article>
+ </div>
+</div></section>
+</main>
+
+<section class="contact" id="contact"><div class="wrap">
+ <div><p class="eyebrow">Contacto</p><h2>Hablemos</h2><p>Cuéntanos qué datos tienes o qué proceso te quita tiempo. En la primera reunión te enseñamos un ejemplo funcionando.</p></div>
+ <dl>
+  <div><dt>Correo</dt><dd><span class="soon">Próximamente</span></dd></div>
+  <div><dt>Dónde</dt><dd>Gipuzkoa · Euskal Herria</dd></div>
+  <div><dt>Idiomas</dt><dd>Euskara · Castellano · English</dd></div>
+ </dl>
+</div></section>
+<footer class="foot"><div class="wrap"><a class="logo" href="#top" aria-label="Oihu Data Solutions"><svg viewBox="0 0 10017 2390" aria-hidden="true"><use href="#oihu-logo"/></svg></a><span class="slo">Datuei ahotsa · Voz a los datos · A voice for data</span><span>© 2026 Oihu Data Solutions</span></div></footer>
+
+<script>
+(function () {
+  'use strict';
+  // Annual mean temperature anomaly (°C), Euskal Herria 1940–2025, mean of seven cities, baseline 1940–1970 — from the climate analysis.
+  var ANOM = [-0.131, -0.264, 0.245, 0.795, -0.13, 0.821, 0.175, 1.172, 0.678, 0.702, 0.292, -0.655, -0.217, -0.479, -1.004, 0.334, -1.495, -0.244, 0.106, 0.565, 0.046, 0.929, -0.245, -0.842, -0.03, -0.472, 0.298, -0.187, 0.109, -0.502, -0.369, -0.617, -1.107, -0.562, -0.581, -0.487, -0.485, -0.427, -0.535, -0.346, -0.7, 0.125, 0.414, 0.351, -0.567, -0.126, -0.29, 0.301, 0.301, 1.177, 0.857, -0.132, -0.064, -0.121, 0.805, 0.839, -0.002, 1.289, 0.308, 0.352, 0.562, 0.466, 0.622, 1.269, 0.339, 0.248, 1.223, 0.118, 0.118, 0.512, -0.335, 1.203, 0.401, 0.172, 1.163, 0.93, 0.869, 0.798, 0.894, 0.907, 1.54, 0.734, 2.098, 1.88, 1.32, 1.764];
+  // this page's language, and the other two: link from here, link text, close label
+  var PAGE = 'es', OTHER = {"eu": ["../", "Euskaraz irakurri", "Itxi"], "en": ["../en/", "Read in English", "Close"]};
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  // the waveform: one bar per year, height and colour from the year's temperature anomaly
+  (function wave() {
+    var svg = $('#wave'); if (!svg || !ANOM.length) return;
+    var RD = ['#053061', '#2166ac', '#4393c3', '#92c5de', '#d1e5f0', '#f7f7f7', '#fddbc7', '#f4a582', '#d6604d', '#b2182b', '#67001f'];
+    var hex = function (h) { return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); };
+    var col = function (a) {
+      var x = Math.min(1, Math.max(0, (a + 2) / 4)) * (RD.length - 1), i = Math.min(RD.length - 2, Math.floor(x)), f = x - i;
+      var c0 = hex(RD[i]), c1 = hex(RD[i + 1]);
+      return 'rgb(' + c0.map(function (v, j) { return Math.round(v + (c1[j] - v) * f); }).join(',') + ')';
+    };
+    var n = ANOM.length, w = 1000 / n, mn = Math.min.apply(null, ANOM), mx = Math.max.apply(null, ANOM), out = '';
+    ANOM.forEach(function (a, i) {
+      var h = 18 + 128 * (a - mn) / (mx - mn), y = 75 - h / 2;
+      out += '<rect x="' + (i * w + w * .18).toFixed(2) + '" y="' + y.toFixed(2) + '" width="' + (w * .64).toFixed(2) + '" height="' + h.toFixed(2) + '" rx="' + (w * .32).toFixed(2) + '" fill="' + col(a) + '" style="animation-delay:' + (i * 9) + 'ms"/>';
+    });
+    svg.innerHTML = out;
+  })();
+
+  // the three videos: the button starts the video and hands over to the native controls
+  $$('.player').forEach(function (p) {
+    var v = $('video', p), b = $('.play', p);
+    b.addEventListener('click', function () { b.hidden = true; v.controls = true; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
+    v.addEventListener('play', function () { b.hidden = true; v.controls = true; });
+  });
+
+  // a language picked by hand is remembered (the Basque home page follows it), and the section in view travels with it
+  var store = function (l) { try { localStorage.setItem('oihu.lang', l); } catch (e) {} };
+  $$('.langs a').forEach(function (a) {
+    a.addEventListener('click', function () { store(a.hreflang); if (location.hash) a.href = a.href.split('#')[0] + location.hash; });
+  });
+
+  // first visit: offer the browser's language when this page is in another one. Never a redirect, so search engines see all three pages.
+  var saved = null;
+  try { saved = localStorage.getItem('oihu.lang'); } catch (e) {}
+  if (!saved) {
+    var nl = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+    var want = /^eu/i.test(nl) ? 'eu' : /^es|^ca|^gl/i.test(nl) ? 'es' : /^en|^fr|^de|^it|^pt|^nl/i.test(nl) ? 'en' : null;
+    var o = want && OTHER[want];
+    if (o) {
+      var bar = $('#suggest'), link = $('#suggest-a'), x = $('#suggest-x');
+      bar.lang = want; link.href = o[0]; link.hreflang = want; link.textContent = o[1] + ' →'; x.setAttribute('aria-label', o[2]);
+      link.addEventListener('click', function () { store(want); });
+      x.addEventListener('click', function () { store(PAGE); bar.hidden = true; });
+      bar.hidden = false;
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

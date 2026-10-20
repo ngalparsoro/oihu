@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ngalparsoro.github.io/oihu/sitemap.xml
