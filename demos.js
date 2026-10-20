@@ -72,41 +72,52 @@
     tip.style.top = y + 'px';
   }
 
-  // ---- 1. the climate waveform: a tooltip per year, the seven cities, and the years played as notes ----
+  // ---- 1. the climate waveform: read each year's temperature, compare it with the 1940–1970 average, pick a city, hear it ----
   (function climate() {
-    const svg = $('#wave'), box = $('.wavebox'), tip = $('#wtip'), read = $('#wread'), btn = $('#wplay'), pick = $('#wcity');
+    const svg = $('#wave'), box = $('.wavebox'), now = $('#wnow'), read = $('#wread'), btn = $('#wplay'), pick = $('#wcity');
     if (!svg || !D.clima) return;
     const C = D.clima, Y0 = C.years[0], N = C.years.length, hint = read.textContent, playLabel = btn.lastChild.textContent;
     const all = [C.mean].concat(Object.keys(C.cities).map((c) => C.cities[c]));
     const lo = Math.min.apply(null, all.map((s) => Math.min.apply(null, s)));
     const hi = Math.max.apply(null, all.map((s) => Math.max.apply(null, s)));
+    const far = Math.max(-lo, hi);
     // the same diverging scale as before: blue colder, red warmer, a pale midpoint at the 1940–1970 average
     const RD = ['#053061', '#2166ac', '#4393c3', '#92c5de', '#d1e5f0', '#f7f7f7', '#fddbc7', '#f4a582', '#d6604d', '#b2182b', '#67001f'];
     const col = (a) => ramp(RD, (a + 2) / 4);
+    const TEMP = nf({ minimumFractionDigits: 1, maximumFractionDigits: 1 });
     const w = 1000 / N;
-    const geom = (a) => { const h = 18 + 128 * (a - lo) / (hi - lo); return [75 - h / 2, h]; };
-    let series = C.mean, cur = -1, city = pick.options[0].textContent, playing = false;
+    // two shapes for the same bars: centred (reading the year) or rising and falling from the average line (comparing)
+    const centred = (a) => { const h = 18 + 128 * (a - lo) / (hi - lo); return [75 - h / 2, h]; };
+    const fromBase = (a) => { const h = Math.max(1.5, 68 * Math.abs(a) / far); return a >= 0 ? [75 - h, h] : [75, h]; };
+    let series = C.mean, cur = -1, city = pick.options[0].textContent, playing = false, mode = 'read', blend = 0;
     Object.keys(C.cities).forEach((c) => { el('option', null, c, pick).value = c; });
+    const baseT = () => (pick.value ? C.baseT[pick.value] : C.baseT.mean);
 
+    const base = sv('line', { x1: 0, x2: 1000, y1: 75, y2: 75, class: 'base', opacity: 0 }, svg);
     const rects = series.map((a, i) => {
-      const g = geom(a);
+      const g = centred(a);
       return sv('rect', { x: (i * w + w * .18).toFixed(2), y: g[0].toFixed(2), width: (w * .64).toFixed(2), height: g[1].toFixed(2), rx: (w * .32).toFixed(2), fill: col(a), style: 'animation-delay:' + (i * 9) + 'ms' }, svg);
     });
-    const setBar = (r, a) => { const g = geom(a); r.setAttribute('y', g[0].toFixed(2)); r.setAttribute('height', g[1].toFixed(2)); r.setAttribute('fill', col(a)); };
+    const setBar = (r, a) => {
+      const g0 = centred(a), g1 = fromBase(a);
+      r.setAttribute('y', (g0[0] + (g1[0] - g0[0]) * blend).toFixed(2));
+      r.setAttribute('height', (g0[1] + (g1[1] - g0[1]) * blend).toFixed(2));
+      r.setAttribute('fill', col(a));
+    };
+    const idle = () => { now.textContent = mode === 'cmp' ? '— ' + T.clima.base : ''; };
 
-    function show(i) {
-      if (i === cur) return;
+    function show(i, force) {
+      if (i === cur && !force) return;
       cur = i;
       rects.forEach((r, j) => r.classList.toggle('on', j === i));
       svg.classList.toggle('dim', i >= 0);
-      if (i < 0) { tip.hidden = true; read.textContent = hint; return; }
-      const v = SIGNED.format(series[i]).replace('-', '−') + ' °C';
-      tip.textContent = '';
-      el('b', null, String(Y0 + i), tip);
-      tip.appendChild(txt(' · ' + v));
-      const s = svg.getBoundingClientRect(), b = box.getBoundingClientRect();
-      place(tip, box, s.left - b.left + (i + .5) * s.width / N, s.top - b.top);
-      read.textContent = fill(T.clima.read, { y: Y0 + i, v: v, c: city });
+      if (i < 0) { idle(); read.textContent = hint; return; }
+      // the year in view, in the free space of the control bar (the bar itself stays lit, the rest dim)
+      const y = Y0 + i, v = SIGNED.format(series[i]).replace('-', '−') + ' °C', t = TEMP.format(baseT() + series[i]) + ' °C';
+      now.textContent = '';
+      el('b', null, String(y), now);
+      now.appendChild(txt(fill(mode === 'cmp' ? T.clima.diff : T.clima.abs, { y: y, t: t, v: v }).slice(String(y).length)));
+      read.textContent = fill(T.clima.read, { y: y, t: t, v: v, c: city });
     }
     const at = (x) => { const r = svg.getBoundingClientRect(); return Math.max(0, Math.min(N - 1, Math.floor((x - r.left) / r.width * N))); };
     svg.addEventListener('pointermove', (e) => { if (!playing) show(at(e.clientX)); });
@@ -130,7 +141,7 @@
       const from = series.slice(), to = pick.value ? C.cities[pick.value] : C.mean;
       series = to;
       tween(450, (k) => rects.forEach((r, i) => setBar(r, from[i] + (to[i] - from[i]) * k)));
-      if (cur >= 0) { const i = cur; cur = -1; show(i); }
+      if (cur >= 0) show(cur, true);
     });
 
     // sound: one short note per year, higher when warmer, on a pentatonic scale so it stays pleasant
@@ -140,6 +151,7 @@
       const k = Math.round((a - lo) / (hi - lo) * (STEPS.length * 3 - 1));
       return 196 * Math.pow(2, (Math.floor(k / 5) * 12 + STEPS[k % 5]) / 12);
     };
+    const hearBtn = $('button.way[data-way="hear"]');
     function start() {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return;
@@ -162,6 +174,7 @@
       playing = true;
       btn.setAttribute('aria-pressed', 'true');
       btn.lastChild.textContent = T.clima.stop;
+      if (hearBtn) hearBtn.classList.add('on');
       (function frame() {
         const i = Math.floor((ctx.currentTime - t0) / DT);
         if (i >= N) { stop(); return; }
@@ -180,42 +193,37 @@
       playing = false;
       btn.setAttribute('aria-pressed', 'false');
       btn.lastChild.textContent = playLabel;
+      if (hearBtn) hearBtn.classList.remove('on');
       show(-1);
     }
     btn.addEventListener('click', () => (playing ? stop() : start()));
 
-    // the four ways above the waveform: each button shows its way on it
-    const key = $('.wkey'), ways = Array.prototype.slice.call(document.querySelectorAll('.way'));
-    const CMP = ['Maule', 'Bilbo', ''];   // the warmest and the least warmed city of the last decade, then the average again
-    let cmpAt = -1;
+    // the ways above the waveform ("see it" only explains the colours): read, compare, hear
+    const ways = Array.prototype.slice.call(document.querySelectorAll('button.way'));
+    function setMode(m) {
+      mode = m;
+      ways.forEach((b) => { if (b.dataset.way !== 'hear') b.classList.toggle('on', b.dataset.way === m); });
+      const from = blend, to = m === 'cmp' ? 1 : 0;
+      tween(450, (k) => { blend = from + (to - from) * k; base.setAttribute('opacity', blend); rects.forEach((r, i) => setBar(r, series[i])); });
+      if (cur >= 0) show(cur, true); else idle();
+    }
     const WAYS = {
-      see: () => {
-        if (playing) stop();
-        show(-1);
-        rects.forEach((r, i) => { r.style.animation = 'none'; r.getBoundingClientRect(); r.style.animation = ''; r.style.animationDelay = (i * 9) + 'ms'; });
-        if (key) { key.classList.remove('flash'); key.getBoundingClientRect(); key.classList.add('flash'); }
-      },
       read: () => {
         if (playing) stop();
+        setMode('read');
         let i = 0;
         series.forEach((a, k) => { if (a > series[i]) i = k; });
-        cur = -1;
-        show(i);
+        show(i, true);
       },
-      cmp: () => {
-        cmpAt = (cmpAt + 1) % CMP.length;
-        pick.value = CMP[cmpAt];
-        pick.dispatchEvent(new Event('change'));
-        setTimeout(() => { cur = -1; show(N - 1); }, REDUCED ? 0 : 480);
-      },
+      cmp: () => { if (playing) stop(); setMode('cmp'); show(N - 1, true); },
       hear: () => { if (!playing) start(); },
     };
     ways.forEach((b) => b.addEventListener('click', () => {
-      ways.forEach((x) => x.classList.toggle('on', x === b));
       const r = box.getBoundingClientRect();
       if (r.top < 70 || r.bottom > innerHeight) box.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
       WAYS[b.dataset.way]();
     }));
+    setMode('read');
   })();
 
   // ---- 2. the agent: it reads, searches and prepares, then waits for a person to approve ----
