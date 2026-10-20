@@ -21,4 +21,67 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/"/>
   </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/datuak/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/datuak/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/datos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/data/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/datuak/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/es/datos/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/datuak/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/datos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/data/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/datuak/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/en/data/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/datuak/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/datos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/data/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/datuak/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/agenteak/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/agenteak/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/agentes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/agents/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/agenteak/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/es/agentes/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/agenteak/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/agentes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/agents/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/agenteak/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/en/agents/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/agenteak/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/agentes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/agents/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/agenteak/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/industria/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/industria/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/industria/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/industry/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/industria/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/es/industria/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/industria/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/industria/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/industry/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/industria/"/>
+  </url>
+  <url>
+    <loc>https://ngalparsoro.github.io/oihu/en/industry/</loc>
+    <xhtml:link rel="alternate" hreflang="eu" href="https://ngalparsoro.github.io/oihu/industria/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ngalparsoro.github.io/oihu/es/industria/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngalparsoro.github.io/oihu/en/industry/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngalparsoro.github.io/oihu/industria/"/>
+  </url>
 </urlset>

@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
+<script>document.documentElement.className = 'js'</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
@@ -110,6 +111,50 @@ p{margin:0}
 @keyframes grow{from{transform:scaleY(.25);opacity:.4}to{transform:scaleY(1);opacity:1}}
 .wyears{display:flex;justify-content:space-between;margin-top:10px;font:500 12px/1 var(--sans);letter-spacing:.06em;color:var(--band-ink-2);font-variant-numeric:tabular-nums}
 .wave figcaption{font-size:13.5px;line-height:1.5;color:var(--ink-3);max-width:62em}
+/* the waveform answers: a tooltip per bar, a city picker and a play button that turns the years into notes */
+.wavebox{position:relative}
+#wave{cursor:crosshair;touch-action:pan-y}
+#wave:focus-visible{outline:2px solid var(--band-accent);outline-offset:6px;border-radius:4px}
+#wave rect{transition:opacity .2s}
+#wave.dim rect{opacity:.32}
+#wave.dim rect.on{opacity:1}
+.wctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.wplay{display:inline-flex;align-items:center;gap:9px;padding:9px 16px 9px 12px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:600 14.5px/1 var(--sans);cursor:pointer}
+.wplay:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
+.wplay svg{width:16px;height:16px;fill:currentColor}
+.wplay .i-stop,.wplay[aria-pressed="true"] .i-play{display:none}
+.wplay[aria-pressed="true"] .i-stop{display:inline}
+.wcity{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-3)}
+.wcity select{font:500 14.5px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:8px 30px 8px 14px;-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.wread{flex:1 1 240px;margin:0;font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.no-js .wctl{display:none}
+/* four ways to understand the same series, just above the waveform; each one is a button that shows itself on it */
+.ways{display:grid;gap:10px;margin-top:clamp(14px,2.4vw,28px);padding-top:clamp(22px,3vw,34px);border-top:1px solid var(--line)}
+.ways-h{font-size:clamp(26px,3vw,36px);line-height:1.12}
+.ways-p{margin:0;max-width:48em;font-size:17px;line-height:1.6;color:var(--ink-2)}
+.ways-list{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.way{all:unset;box-sizing:border-box;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 12px;align-items:center;align-content:start;width:100%;height:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .15s,transform .15s,box-shadow .15s}
+.way:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow)}
+.way:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.way.on{border-color:var(--accent);background:var(--accent-soft)}
+.wi{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:flex;align-items:center;justify-content:center}
+.way.on .wi{background:var(--accent);color:var(--surface)}
+.wi svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.way b{font:600 16px/1.3 var(--sans);color:var(--ink)}
+.wt{grid-column:1/-1;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.ways + .wave{margin-top:4px}
+.no-js .ways-list{display:none}
+.wkey{display:inline-flex;align-items:center;gap:8px;letter-spacing:.02em}
+.wkey i{display:block;width:clamp(56px,12vw,140px);height:6px;border-radius:3px;background:linear-gradient(90deg,#2166ac,#92c5de,#f7f7f7,#f4a582,#b2182b)}
+.wkey.flash i{animation:flash .9s ease-in-out 2}
+@keyframes flash{50%{box-shadow:0 0 0 4px var(--band-accent)}}
+@media (max-width:980px){.ways-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:540px){.ways-list{grid-template-columns:minmax(0,1fr)}}
+/* the demo link under each video */
+.media .try{margin-top:16px}
+.tip{position:absolute;z-index:3;pointer-events:none;background:var(--ink);color:var(--paper);font:500 13px/1.35 var(--sans);padding:7px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,calc(-100% - 10px));box-shadow:0 8px 20px -10px rgba(2,27,46,.6)}
+.tip b{font-weight:700}
+.wavebox .tip{background:var(--band-ink);color:var(--band)}
 .name{max-width:42em;font:400 clamp(18px,1.6vw,20px)/1.55 var(--serif);color:var(--ink-2);border-left:2px solid var(--sand);padding-left:18px;margin-top:6px}
 .name b{color:var(--ink);font-weight:600}
 /* sections */
@@ -192,7 +237,258 @@ a.case:hover svg{color:var(--accent)}
 .foot .logo{--lm:var(--band-accent);--lw:var(--band-ink);--ld:var(--band-ink-2)}
 .foot .logo svg{height:30px}
 .foot .slo{font:italic 400 16px/1.4 var(--serif)}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wave rect{animation:none}.btn,.play{transition:none}}
+/* demos: one card under each service, so the page shows instead of telling. Status colours always come with an icon and a label. */
+.demo{--good:#0ca30c;--warn:#fab219;--crit:#d03b3b;--c1:#2a78d6;--c2:#eb6834;--c3:#1baf7a;--c4:#eda100;--c5:#e87ba4;margin:0 0 clamp(36px,5vw,60px);padding:clamp(18px,3vw,32px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:grid;gap:20px;min-width:0}
+.demo-head{display:grid;gap:8px;max-width:48em}
+.demo-k{display:inline-flex;align-items:center;gap:9px;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.demo-k:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);animation:beat 2.4s ease-in-out infinite}
+@keyframes beat{50%{box-shadow:0 0 0 7px var(--accent-soft)}}
+.demo h2{font-size:clamp(26px,2.8vw,34px);line-height:1.15}
+.demo-head p:not(.demo-k){color:var(--ink-2)}
+.demo-note{font-size:13.5px;line-height:1.55;color:var(--ink-3);max-width:66em}
+.stage{min-width:0}
+.no-js .stage{display:none}
+.lbl{font:600 11.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.chip{font:600 14px/1 var(--sans);padding:9px 15px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-selected="true"],.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+code{font:500 .86em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+.reveal{opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.reveal.in{opacity:1;transform:none}
+/* agent */
+.ag-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.ag-body{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(16px,2.6vw,32px);margin-top:20px;align-items:start}
+.doc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.doc-t{display:flex;align-items:center;gap:9px;margin:0;font:600 14px/1.3 var(--sans);overflow-wrap:anywhere}
+.doc-t svg{width:18px;height:18px;flex:0 0 18px;color:var(--ink-3)}
+.doc ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:4px;font-size:14.5px;color:var(--ink-2)}
+.doc li{padding:3px 6px;margin:0 -6px;border-radius:5px;transition:background-color .3s,color .3s}
+.doc li.read{background:var(--accent-soft);color:var(--ink)}
+.ag-run{display:grid;gap:14px;min-width:0}
+.ag-steps{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ag-steps li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;align-items:start}
+.ag-steps .dot{width:16px;height:16px;margin-top:2px;border-radius:50%;border:2px solid var(--line-2);position:relative}
+.ag-steps li.run .dot{border-color:var(--accent);border-top-color:transparent;animation:spin .8s linear infinite}
+.ag-steps li.ok .dot{background:var(--accent);border-color:var(--accent)}
+.ag-steps li.ok .dot:after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid var(--surface);border-width:0 2px 2px 0;transform:rotate(45deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ag-steps code{color:var(--accent-ink);background:var(--accent-soft);padding:2px 7px;border-radius:5px;font-size:12.5px}
+.ag-steps p{margin:5px 0 0;font-size:15px;line-height:1.5;color:var(--ink-2)}
+.out{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--paper);display:grid;gap:10px}
+.out h4{margin:0;font:600 13px/1.3 var(--sans);color:var(--ink-2)}
+.res{display:grid;grid-template-columns:minmax(0,1fr) minmax(70px,120px);gap:4px 14px;align-items:center}
+.res b{font-weight:600;font-size:15px}
+.res span{display:block;font-size:13.5px;color:var(--ink-3)}
+.score{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;font:600 13px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:3px;background:var(--accent);transition:width .8s cubic-bezier(.2,.7,.2,1)}
+.form{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;margin:0;font-size:14.5px}
+.form dt{color:var(--ink-3)}
+.form dd{margin:0;font-weight:500;min-height:1.4em}
+.typed{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin:0;min-height:3em}
+.alert{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:12px 14px;background:var(--sand-soft);color:var(--sand-ink);font-size:14.5px;line-height:1.5}
+.alert:before{content:"!";flex:0 0 20px;height:20px;border-radius:50%;background:var(--sand-ink);color:var(--sand-soft);font:700 13px/20px var(--sans);text-align:center}
+.decide{border:2px solid var(--sand);background:var(--sand-soft);border-radius:12px;padding:16px 18px;display:grid;gap:12px}
+.decide .lbl{margin:0;color:var(--sand-ink)}
+.decide .q{margin:0;font:500 clamp(19px,1.9vw,22px)/1.35 var(--serif);color:var(--ink)}
+.decide .btns{display:flex;flex-wrap:wrap;gap:10px}
+.decide .btn{padding:12px 20px;cursor:pointer}
+.decide .btn[disabled]{opacity:.45;cursor:default}
+.wait{display:flex;align-items:center;gap:8px;margin:0;font-size:13.5px;color:var(--sand-ink)}
+.wait:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--sand-ink);animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.verdict{display:flex;gap:10px;align-items:flex-start;margin:0;font-size:15px;line-height:1.5;padding:12px 14px;border-radius:10px;background:var(--accent-soft);color:var(--ink)}
+.verdict.no{background:var(--paper);border:1px solid var(--line)}
+.again{justify-self:start;background:none;border:0;padding:4px 0;font:600 14px/1 var(--sans);color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+/* map */
+.mp-ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.mp-ctl .seg{display:inline-flex;gap:6px}
+.mp-search{flex:1 1 220px;max-width:340px;min-width:0;font:400 15px/1.2 var(--sans);padding:10px 16px;border:1px solid var(--line-2);border-radius:999px;background:var(--paper);color:var(--ink)}
+.mp-search:focus{outline:2px solid var(--accent);outline-offset:1px}
+.mp-body{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);margin-top:18px;align-items:start}
+.mp-map{position:relative;min-width:0}
+.mp-map svg{width:100%;height:auto;display:block;touch-action:manipulation}
+.mp-map .m{stroke:var(--surface);stroke-width:.6;vector-effect:non-scaling-stroke;stroke-linejoin:round;cursor:pointer;transition:fill .45s,opacity .5s}
+.mp-map.pre .m{opacity:0}
+.mp-terr{fill:none;stroke:var(--ink-2);stroke-width:1.1;vector-effect:non-scaling-stroke;stroke-linejoin:round;opacity:.75;pointer-events:none}
+.mp-hover,.mp-sel{fill:none;stroke:var(--ink);stroke-linejoin:round;pointer-events:none;vector-effect:non-scaling-stroke}
+.mp-hover{stroke-width:1.4}
+.mp-sel{stroke-width:2.6}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-top:12px;font-size:12.5px;color:var(--ink-3)}
+.ramp{display:grid;gap:4px;width:min(300px,100%)}
+.ramp i{display:block;height:8px;border-radius:4px}
+.ramp div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+.nd{display:inline-flex;align-items:center;gap:6px}
+.nd svg{width:16px;height:12px;border-radius:2px}
+.mp-panel{display:grid;gap:12px;min-width:0}
+.mp-place{margin:0;font:600 12px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.mp-big{margin:0;font:600 clamp(42px,5vw,58px)/1 var(--sans);letter-spacing:-.01em;color:var(--ink)}
+.mp-sub{margin:-4px 0 4px;color:var(--ink-2)}
+.chain{list-style:none;margin:0;padding:0;display:grid;gap:16px;position:relative}
+.chain:before{content:"";position:absolute;left:13px;top:10px;bottom:10px;width:2px;background:var(--line-2);transform-origin:top;transform:scaleY(0);transition:transform .9s ease-out}
+.chain.in:before{transform:none}
+.chain li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px}
+.chain .n{position:relative;z-index:1;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--surface);font:italic 500 16px/28px var(--serif);text-align:center}
+.chain h4{margin:4px 0 4px;font:600 14.5px/1.3 var(--sans)}
+.chain p{margin:0 0 3px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.chain a{color:var(--accent-ink);font-weight:600;font-size:14px;text-underline-offset:3px}
+.chain code{color:var(--ink)}
+.mp-pick{color:var(--ink-3)}
+/* threshold */
+.um-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:var(--paper);display:grid;gap:8px;align-content:start}
+.stat .l{display:flex;align-items:center;gap:8px;font-size:13.5px;line-height:1.25;color:var(--ink-2)}
+.stat .v{font:600 clamp(26px,2.6vw,32px)/1 var(--sans);color:var(--ink)}
+.stat .v small{font:500 14px/1 var(--sans);color:var(--ink-3);margin-left:4px}
+.ico{flex:0 0 18px;width:18px;height:18px}
+.um-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:18px}
+.um-ctl label{font:600 14px/1 var(--sans)}
+.um-ctl input[type=range]{flex:1 1 220px;max-width:420px;accent-color:var(--ink)}
+.um-ctl output{font:600 15px/1 var(--sans);font-variant-numeric:tabular-nums;min-width:4.5em}
+.um-charts{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(16px,2.6vw,32px);margin-top:14px;align-items:start}
+.chart{position:relative;min-width:0}
+.chart svg{display:block;max-width:100%;height:auto;overflow:visible}
+.chart text{font:400 11.5px var(--sans);fill:var(--ink-3)}
+.chart .t{font-weight:600;fill:var(--ink-2)}
+.chart .t,.th text{paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+.grid line{stroke:var(--line);stroke-width:1}
+.pt{stroke:var(--surface);stroke-width:1.5}
+.pt.n{fill:var(--ink-3);opacity:.45;stroke-width:.8}
+.pt.tp{fill:var(--good)}
+.pt.fn{fill:var(--crit)}
+.pt.fp{fill:var(--warn)}
+.zone{fill:var(--warn);opacity:.07}
+.th line{stroke:var(--ink);stroke-width:2}
+.th .grip{fill:var(--ink)}
+.th .hit{fill:transparent;cursor:ns-resize}
+.th text{font-weight:600;fill:var(--ink)}
+.cost{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.cost-dot{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.min line{stroke:var(--ink-3);stroke-width:1}
+.um-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:13px;color:var(--ink-2)}
+.um-legend span{display:inline-flex;align-items:center;gap:7px}
+.um-legend svg{width:14px;height:14px}
+.um-min{margin:8px 0 0;font-size:13.5px;color:var(--ink-3)}
+/* home: each service links to its demo page */
+.try{display:grid;gap:6px;margin-top:6px;padding:14px 16px;border-radius:10px;border:1px solid var(--accent);background:var(--accent-soft);text-decoration:none;color:var(--ink);transition:transform .15s,box-shadow .15s}
+.try:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.try-t{font-size:15px;line-height:1.5;color:var(--ink-2)}
+.try-go{font:600 14.5px/1 var(--sans);color:var(--accent-ink)}
+/* demo pages */
+.page-hero .wrap{padding-block:clamp(36px,5.5vw,68px) clamp(22px,3vw,34px);display:grid;gap:16px}
+.back{justify-self:start;font:600 14px/1 var(--sans);color:var(--ink-3);text-decoration:none}
+.back:hover{color:var(--ink)}
+.page-h{font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.02em}
+.demo-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.demo-nav a{display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);text-decoration:none;font:600 14px/1 var(--sans)}
+.demo-nav a:hover{border-color:var(--ink);color:var(--ink)}
+.demo-nav a[aria-current]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.demo-nav .num{font:italic 500 16px/1 var(--serif);color:var(--accent)}
+.demo-nav a[aria-current] .num{color:var(--band-accent)}
+.demos .wrap{padding-bottom:clamp(36px,5vw,72px)}
+/* view switchers and filters */
+.vctl{display:grid;gap:12px}
+.vrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.vrow .chip.s{padding:7px 12px;font-size:13.5px}
+.vrow .sep{width:1px;align-self:stretch;background:var(--line);margin:0 4px}
+.check{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-2)}
+.check input{accent-color:var(--ink);width:16px;height:16px}
+.vbody{margin-top:16px;min-width:0}
+.vtitle{margin:0 0 12px;font-size:14.5px;color:var(--ink-2)}
+.hb{display:grid;gap:7px}
+.hb h4{margin:10px 0 2px;font:600 12px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.hb-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) 4.6em;gap:12px;align-items:center;font-size:14px}
+.hb-row span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb-row small{color:var(--ink-3);margin-left:6px}
+.hb-row b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.hb-bar{height:12px;background:var(--paper);border-radius:0 4px 4px 0}
+.hb-bar i{display:block;height:100%;border-radius:0 4px 4px 0;background:var(--accent);transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.tbl-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:13.5px;color:var(--ink-3)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.tbl th{background:var(--paper);text-align:left;font:600 12.5px/1.3 var(--sans);color:var(--ink-2);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th button{all:unset;cursor:pointer}
+.tbl th[aria-sort="ascending"] button:after{content:" ▲";font-size:10px}
+.tbl th[aria-sort="descending"] button:after{content:" ▼";font-size:10px}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl .n{text-align:right}
+.tbl tr:last-child td{border-bottom:0}
+.more{margin-top:12px}
+/* the climate calendar */
+.cal-legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:10px;font-size:12.5px;color:var(--ink-3)}
+.cal-legend .ramp{width:min(280px,100%)}
+/* criteria */
+.kr{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(18px,3vw,36px);align-items:start}
+.weights{display:grid;gap:14px}
+.weights label{display:grid;grid-template-columns:12px minmax(0,7em) minmax(0,1fr) 1.2em;gap:10px;align-items:center;font-size:14.5px}
+.weights input{accent-color:var(--ink);min-width:0}
+.weights b{font-variant-numeric:tabular-nums;text-align:right}
+.sw{width:12px;height:12px;border-radius:3px}
+.rank{position:relative}
+.rank-row{position:absolute;left:0;right:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,1.15fr) 2.4em;gap:12px;align-items:center;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.rank-row div{min-width:0}
+.rank-row b{display:block;font-size:14.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-row span{display:block;font-size:12.5px;color:var(--ink-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-row em{font:600 15px/1 var(--sans);font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
+.stack{display:flex;gap:2px;height:14px}
+.stack i{display:block;height:100%;transition:flex-basis .55s cubic-bezier(.2,.7,.2,1)}
+.stack i:last-child{border-radius:0 4px 4px 0}
+details.tview{margin-top:14px;font-size:14px}
+details.tview summary{cursor:pointer;color:var(--accent-ink);font-weight:600}
+details.tview .tbl-wrap{margin-top:10px}
+/* decision log */
+.log{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.log ol{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}
+.log li{display:grid;grid-template-columns:5.5em minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:7px 10px;border-radius:8px;background:var(--paper)}
+.log time{font-variant-numeric:tabular-nums;color:var(--ink-3);font-size:13px}
+.log .ok{color:var(--accent-ink);font-weight:600}
+.log .ko{color:var(--ink-2);font-weight:600}
+.log .empty{color:var(--ink-3);background:none;padding:0;display:block}
+.log-note{margin:10px 0 0;font-size:13px;color:var(--ink-3)}
+/* model views */
+.cm{display:grid;grid-template-columns:minmax(4.5em,7.5em) repeat(2,minmax(0,1fr));gap:8px;max-width:560px}
+.cm .h{font:600 12.5px/1.3 var(--sans);color:var(--ink-3);align-self:end;padding:0 4px}
+.cm .rh{align-self:center}
+.cm .cell{border-radius:10px;padding:14px;display:grid;gap:4px;border:1px solid var(--line);min-width:0}
+.cm .cell b{font:600 30px/1 var(--sans)}
+.cm .cell span{display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--ink-2);min-width:0;overflow-wrap:anywhere}
+.cm .tp{background:color-mix(in srgb,var(--good) 12%,var(--surface))}
+.cm .fn{background:color-mix(in srgb,var(--crit) 12%,var(--surface))}
+.cm .fp{background:color-mix(in srgb,var(--warn) 16%,var(--surface))}
+.cm .tn{background:var(--paper)}
+.pr-line{margin:12px 0 0;font-size:14px;color:var(--ink-2)}
+.kb{display:grid;gap:10px;max-width:640px}
+.kb-row{display:grid;grid-template-columns:minmax(0,12em) minmax(0,1fr) 4em;gap:12px;align-items:center;font-size:14px}
+.kb-bar{display:flex;gap:2px;height:14px}
+.kb-bar i{display:block;height:100%}
+.kb-bar i:last-child{border-radius:0 4px 4px 0}
+.kb-row b{text-align:right;font-variant-numeric:tabular-nums}
+.costs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px;margin-top:14px}
+.costs label{display:grid;gap:6px;font-size:13.5px;color:var(--ink-2)}
+.costs span{display:flex;justify-content:space-between;gap:10px}
+.costs output{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.costs input{accent-color:var(--ink);width:100%}
+.diag{stroke:var(--line-2);stroke-width:1}
+.vdot{fill:var(--accent);stroke:var(--surface);stroke-width:1}
+.vdot.all{opacity:.6}
+.vdot.off{fill:var(--line-2);stroke-width:.6}
+.med{stroke:var(--ink);stroke-width:2}
+.vline{fill:none;stroke:var(--line-2);stroke-width:1.5;stroke-linejoin:round}
+.vline.on{stroke:var(--accent);stroke-width:2.5}
+.vline.eh{stroke:var(--ink);stroke-width:2.5}
+.vpt{fill:var(--ink);stroke:var(--surface);stroke-width:2}
+.vpt.on{fill:var(--accent)}
+.cross{stroke:var(--ink-3);stroke-width:1}
+.grid line.zero{stroke:var(--ink-3)}
+.cell-hi{fill:none;stroke:var(--ink);stroke-width:1.5}
+.ref{fill:var(--surface);stroke:var(--ink-2);stroke-width:2}
+@media (max-width:860px){.kr{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.cm .cell{padding:10px}.cm .cell b{font-size:24px}.costs{grid-template-columns:minmax(0,1fr)}.hb-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 4.2em}.kb-row{grid-template-columns:minmax(0,8em) minmax(0,1fr) 3.4em}}
+@media (max-width:860px){.ag-body,.mp-body,.um-charts{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.um-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .demo{--c1:#3987e5;--c2:#d95926;--c3:#199e70;--c4:#c98500;--c5:#d55181}}
+:root[data-theme="dark"] .demo{--c1:#3987e5;--c2:#d95926;--c3:#199e70;--c4:#c98500;--c5:#d55181}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wave rect{animation:none}.btn,.play{transition:none}.demo-k:before,.wait:before,.ag-steps li.run .dot{animation:none}.reveal,.chain:before,.bar i,.mp-map .m,.rank-row,.stack i,.hb-bar i,.way{transition:none}.wkey.flash i{animation:none}}
 </style>
 </head>
 <body>
@@ -213,7 +509,26 @@ a.case:hover svg{color:var(--accent)}
  <p class="others"><span lang="eu">Datuei ahotsa.</span><span lang="en">A voice for data.</span></p>
  <p class="lead">Convertimos información dispersa en plataformas de datos, sistemas de gestión con agentes de IA y paneles para la industria: herramientas que se entienden y se usan, conectadas a lo que ya tienes.</p>
  <div class="ctas"><a class="btn primary" href="#services">Ver los servicios</a><a class="btn" href="#contact">Hablemos</a></div>
- <figure class="wave"><div class="wavebox"><svg id="wave" viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-labelledby="wavecap"></svg><div class="wyears" aria-hidden="true"><span>1940</span><span>2025</span></div></div><figcaption id="wavecap">Euskal Herria 1940–2025: anomalía de la temperatura media anual, año a año. Datos ERA5, análisis propio.</figcaption></figure>
+ <div class="ways">
+  <p class="demo-k">Pruébalo</p>
+  <h2 class="ways-h">Un mismo dato, cuatro formas de entenderlo</h2>
+  <p class="ways-p">Una tabla con 86 temperaturas no dice nada a primera vista. La misma serie, bien contada, se ve, se lee, se compara… y hasta se escucha. Pruébalo con el clima de Euskal Herria:</p>
+  <ul class="ways-list">
+   <li><button type="button" class="way" data-way="see"><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><b>Verlo</b><span class="wt">Cada barra es un año: azul si hizo más frío que en 1940–1970, rojo si hizo más calor.</span></button></li>
+   <li><button type="button" class="way" data-way="read"><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5v14l4-3.6 2.6 6 2.6-1.1-2.6-6H17z"/></svg></span><b>Leerlo</b><span class="wt">Pasa por una barra y aparece la cifra exacta de ese año.</span></button></li>
+   <li><button type="button" class="way" data-way="cmp"><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14m0 0-3.5-3.5M18 8l-3.5 3.5M20 16H6m0 0 3.5-3.5M6 16l3.5 3.5"/></svg></span><b>Compararlo</b><span class="wt">Cambia de ciudad: en la última década, de +1,1 °C en Bilbo a +1,8 °C en Maule.</span></button></li>
+   <li><button type="button" class="way" data-way="hear"><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5.5l11-2v12.5"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg></span><b>Escucharlo</b><span class="wt">Cada año es una nota: cuanto más calor, más aguda. Al final, el calentamiento se oye.</span></button></li>
+  </ul>
+ </div>
+ <figure class="wave">
+  <div class="wavebox"><svg id="wave" viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-labelledby="wavecap"></svg><div class="tip" id="wtip" hidden></div><div class="wyears" aria-hidden="true"><span>1940</span><span class="wkey"><span>más frío</span><i></i><span>más calor</span></span><span>2025</span></div></div>
+  <div class="wctl">
+   <button type="button" class="wplay" id="wplay" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="i-play" d="M6.5 4.5v11l9-5.5z"/><path class="i-stop" d="M5.5 5.5h9v9h-9z"/></svg><span>Escuchar el clima</span></button>
+   <label class="wcity"><span>Ciudad</span><select id="wcity"><option value="">Media de las siete</option></select></label>
+   <p class="wread" id="wread" aria-live="polite">Pasa por las barras o escúchalo: cuanto más calor, más aguda la nota.</p>
+  </div>
+  <figcaption id="wavecap">Euskal Herria 1940–2025: anomalía de la temperatura media anual, año a año. Datos ERA5, análisis propio.</figcaption>
+ </figure>
  <p class="name"><b>Oihu</b>, en euskera, es la llamada que se hace en voz alta en la plaza. Es lo que hacemos con los datos: sacarlos de los archivos y hacer que se oigan.</p>
 </div></section>
 
@@ -227,8 +542,9 @@ a.case:hover svg{color:var(--accent)}
    <ul><li>Integración y verificación de fuentes oficiales</li><li>Mapas y gráficos interactivos, rápidos en el móvil</li><li>Webs en euskera, castellano y otros idiomas</li><li>Actualización automática con cada dato nuevo</li></ul>
    <div class="cases"><a class="case" href="https://hautesbehatokia.eus" target="_blank" rel="noopener">Hauteskunde Behatokia <small class="st-ok">En línea</small><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5V8M9.3 2.7 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="case" href="https://nazioenbehatokia.eus" target="_blank" rel="noopener">Observatorio Electoral de las Naciones <small class="st-ok">En línea</small><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5V8M9.3 2.7 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="case">El clima de Euskal Herria</span></div>
   </div>
-  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-datos-es.jpg" src="../video/datos-es.mp4" aria-label="Plataformas y observatorios de datos"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:36</em></button></div><p class="vnote">Los vídeos no tienen sonido; los textos están en pantalla.</p></div>
+  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-datos-es.jpg" src="../video/datos-es.mp4" aria-label="Plataformas y observatorios de datos"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:36</em></button></div><p class="vnote">Los vídeos no tienen sonido; los textos están en pantalla.</p><a class="try" href="../es/datos/"><span class="demo-k">Pruébalo</span><span class="try-t">Un mapa con cifras que se pueden comprobar, cinco formas de ver los mismos resultados y el clima mes a mes.</span><span class="try-go"><span>Ver las demos</span> →</span></a></div>
  </article>
+
 
  <article class="svc" id="svc-agentes">
   <div class="txt">
@@ -238,8 +554,9 @@ a.case:hover svg{color:var(--accent)}
    <div class="cases"><span class="case">MITÜMI <small class="st-team">En equipo</small></span><span class="case">JobScout</span></div>
    <p class="credit">MITÜMI fue un reto de The Bridge para la agencia de eventos MITÜMI (julio de 2026), con 18 personas: 6 de Full Stack y 12 de Data Science e IA. Nora diseñó la plataforma con el equipo e integró los agentes, la API y el despliegue.</p>
   </div>
-  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-agentes-es.jpg" src="../video/agentes-es.mp4" aria-label="Sistemas de gestión con agentes de IA"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:39</em></button></div></div>
+  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-agentes-es.jpg" src="../video/agentes-es.mp4" aria-label="Sistemas de gestión con agentes de IA"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:39</em></button></div><a class="try" href="../es/agentes/"><span class="demo-k">Pruébalo</span><span class="try-t">Valida tú al agente, pon sus criterios y calcula lo que cuesta la IA.</span><span class="try-go"><span>Ver las demos</span> →</span></a></div>
  </article>
+
 
  <article class="svc" id="svc-planta">
   <div class="txt">
@@ -248,8 +565,9 @@ a.case:hover svg{color:var(--accent)}
    <ul><li>Horas y saldos, para cada persona</li><li>El equipo de un vistazo, para responsables</li><li>Orden de fabricación y vales por célula</li><li>Se lee del ERP; lo nuevo se guarda aparte</li></ul>
    <div class="cases"><span class="case">Control de horas <small class="st-ok">En uso en planta</small></span><span class="case">Panel de responsables <small class="st-ok">En uso en planta</small></span><span class="case">Panel de órdenes de fabricación</span></div>
   </div>
-  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-planta-es.jpg" src="../video/planta-es.mp4" aria-label="Paneles de planta sobre el ERP"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:30</em></button></div></div>
+  <div class="media"><div class="player"><video preload="none" playsinline poster="../img/poster-planta-es.jpg" src="../video/planta-es.mp4" aria-label="Paneles de planta sobre el ERP"></video><button type="button" class="play"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#021B2E"/><path d="M11.4 9.2v9.6l7.6-4.8z" fill="#fff"/></svg><span>Ver el vídeo</span><em>2:30</em></button></div><a class="try" href="../es/industria/"><span class="demo-k">Pruébalo</span><span class="try-t">Mueve el umbral de aviso, pon tus propios costes y mira el modelo por dentro.</span><span class="try-go"><span>Ver las demos</span> →</span></a></div>
  </article>
+
 </div></section>
 
 <section class="sec how" id="how"><div class="wrap">
@@ -271,6 +589,7 @@ a.case:hover svg{color:var(--accent)}
 </div></section>
 </main>
 
+
 <section class="contact" id="contact"><div class="wrap">
  <div><p class="eyebrow">Contacto</p><h2>Hablemos</h2><p>Cuéntanos qué datos tienes o qué proceso te quita tiempo. En la primera reunión te enseñamos un ejemplo funcionando.</p></div>
  <dl>
@@ -284,30 +603,10 @@ a.case:hover svg{color:var(--accent)}
 <script>
 (function () {
   'use strict';
-  // Annual mean temperature anomaly (°C), Euskal Herria 1940–2025, mean of seven cities, baseline 1940–1970 — from the climate analysis.
-  var ANOM = [-0.131, -0.264, 0.245, 0.795, -0.13, 0.821, 0.175, 1.172, 0.678, 0.702, 0.292, -0.655, -0.217, -0.479, -1.004, 0.334, -1.495, -0.244, 0.106, 0.565, 0.046, 0.929, -0.245, -0.842, -0.03, -0.472, 0.298, -0.187, 0.109, -0.502, -0.369, -0.617, -1.107, -0.562, -0.581, -0.487, -0.485, -0.427, -0.535, -0.346, -0.7, 0.125, 0.414, 0.351, -0.567, -0.126, -0.29, 0.301, 0.301, 1.177, 0.857, -0.132, -0.064, -0.121, 0.805, 0.839, -0.002, 1.289, 0.308, 0.352, 0.562, 0.466, 0.622, 1.269, 0.339, 0.248, 1.223, 0.118, 0.118, 0.512, -0.335, 1.203, 0.401, 0.172, 1.163, 0.93, 0.869, 0.798, 0.894, 0.907, 1.54, 0.734, 2.098, 1.88, 1.32, 1.764];
   // this page's language, and the other two: link from here, link text, close label
   var PAGE = 'es', OTHER = {"eu": ["../", "Euskaraz irakurri", "Itxi"], "en": ["../en/", "Read in English", "Close"]};
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-
-  // the waveform: one bar per year, height and colour from the year's temperature anomaly
-  (function wave() {
-    var svg = $('#wave'); if (!svg || !ANOM.length) return;
-    var RD = ['#053061', '#2166ac', '#4393c3', '#92c5de', '#d1e5f0', '#f7f7f7', '#fddbc7', '#f4a582', '#d6604d', '#b2182b', '#67001f'];
-    var hex = function (h) { return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); };
-    var col = function (a) {
-      var x = Math.min(1, Math.max(0, (a + 2) / 4)) * (RD.length - 1), i = Math.min(RD.length - 2, Math.floor(x)), f = x - i;
-      var c0 = hex(RD[i]), c1 = hex(RD[i + 1]);
-      return 'rgb(' + c0.map(function (v, j) { return Math.round(v + (c1[j] - v) * f); }).join(',') + ')';
-    };
-    var n = ANOM.length, w = 1000 / n, mn = Math.min.apply(null, ANOM), mx = Math.max.apply(null, ANOM), out = '';
-    ANOM.forEach(function (a, i) {
-      var h = 18 + 128 * (a - mn) / (mx - mn), y = 75 - h / 2;
-      out += '<rect x="' + (i * w + w * .18).toFixed(2) + '" y="' + y.toFixed(2) + '" width="' + (w * .64).toFixed(2) + '" height="' + h.toFixed(2) + '" rx="' + (w * .32).toFixed(2) + '" fill="' + col(a) + '" style="animation-delay:' + (i * 9) + 'ms"/>';
-    });
-    svg.innerHTML = out;
-  })();
 
   // the three videos: the button starts the video and hands over to the native controls
   $$('.player').forEach(function (p) {
@@ -339,6 +638,8 @@ a.case:hover svg{color:var(--accent)}
   }
 })();
 </script>
+<script type="application/json" id="oihu-data">{"lang": "es", "r": "../", "clima": {"years": [1940, 1941, 1942, 1943, 1944, 1945, 1946, 1947, 1948, 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025], "base": [1940, 1970], "mean": [-0.131, -0.264, 0.245, 0.795, -0.13, 0.821, 0.175, 1.172, 0.678, 0.702, 0.292, -0.655, -0.217, -0.479, -1.004, 0.334, -1.495, -0.244, 0.106, 0.565, 0.046, 0.929, -0.245, -0.842, -0.03, -0.472, 0.298, -0.187, 0.109, -0.502, -0.369, -0.617, -1.107, -0.562, -0.581, -0.487, -0.485, -0.427, -0.535, -0.346, -0.7, 0.125, 0.414, 0.351, -0.567, -0.126, -0.29, 0.301, 0.301, 1.177, 0.857, -0.132, -0.064, -0.121, 0.805, 0.839, -0.002, 1.289, 0.308, 0.352, 0.562, 0.466, 0.622, 1.269, 0.339, 0.248, 1.223, 0.118, 0.118, 0.512, -0.335, 1.203, 0.401, 0.172, 1.163, 0.93, 0.869, 0.798, 0.894, 0.907, 1.54, 0.734, 2.098, 1.88, 1.32, 1.764], "cities": {"Arrasate": [-0.398, -0.538, -0.017, 0.515, -0.386, 0.586, -0.105, 0.928, 0.396, 0.349, 0.391, -0.585, -0.196, -0.391, -0.888, 0.414, -1.377, -0.122, 0.264, 0.706, 0.235, 1.175, -0.089, -0.707, 0.139, -0.344, 0.415, -0.041, 0.265, -0.31, -0.283, -0.466, -1.03, -0.437, -0.502, -0.376, -0.369, -0.3, -0.431, -0.229, -0.497, 0.239, 0.528, 0.512, -0.456, 0.018, -0.163, 0.523, 0.42, 1.311, 0.968, -0.008, 0.094, -0.031, 0.92, 0.976, 0.054, 1.485, 0.477, 0.427, 0.639, 0.54, 0.703, 1.412, 0.416, 0.348, 1.318, 0.223, 0.21, 0.538, -0.303, 1.302, 0.454, 0.309, 1.219, 1.0, 0.962, 0.767, 0.723, 0.739, 1.421, 0.539, 1.927, 1.742, 1.274, 1.585], "Baiona": [-0.133, -0.287, 0.204, 0.798, -0.154, 0.702, 0.197, 1.144, 0.61, 0.831, 0.226, -0.474, -0.128, -0.49, -0.953, 0.311, -1.443, -0.253, 0.063, 0.662, 0.101, 0.836, -0.365, -0.814, -0.201, -0.488, 0.348, -0.181, 0.117, -0.427, -0.358, -0.59, -0.944, -0.584, -0.503, -0.47, -0.419, -0.413, -0.492, -0.352, -0.71, 0.082, 0.5, 0.257, -0.456, -0.231, -0.347, 0.125, 0.283, 1.122, 0.883, -0.192, -0.126, -0.109, 0.727, 0.723, 0.043, 1.12, 0.207, 0.453, 0.479, 0.397, 0.579, 1.087, 0.237, 0.186, 1.03, 0.04, 0.062, 0.387, -0.364, 1.032, 0.243, 0.141, 1.109, 0.825, 0.83, 0.53, 0.934, 0.811, 1.507, 0.626, 1.906, 1.647, 1.163, 1.779], "Bilbo": [-0.162, -0.309, 0.167, 0.699, -0.18, 0.596, 0.186, 0.969, 0.636, 0.723, 0.232, -0.551, -0.212, -0.396, -0.827, 0.26, -1.349, -0.171, 0.056, 0.595, 0.163, 0.936, -0.326, -0.701, -0.069, -0.449, 0.264, -0.135, 0.084, -0.332, -0.398, -0.608, -1.067, -0.569, -0.559, -0.449, -0.463, -0.375, -0.39, -0.286, -0.584, 0.061, 0.344, 0.276, -0.601, -0.156, -0.425, 0.293, 0.313, 1.131, 0.837, -0.157, -0.117, -0.115, 0.579, 0.854, 0.005, 1.177, 0.38, 0.388, 0.478, 0.473, 0.57, 1.161, 0.294, 0.319, 1.147, 0.11, 0.155, 0.361, -0.212, 1.09, 0.282, 0.254, 1.157, 0.845, 0.845, 0.628, 0.724, 0.645, 1.391, 0.536, 1.797, 1.683, 1.077, 1.543], "Donostia": [0.02, -0.146, 0.339, 0.841, 0.008, 0.844, 0.426, 1.269, 0.9, 0.943, 0.107, -0.6, -0.252, -0.433, -1.0, 0.171, -1.525, -0.291, 0.009, 0.545, -0.017, 0.874, -0.434, -0.861, -0.18, -0.559, 0.201, -0.262, 0.061, -0.503, -0.496, -0.625, -1.125, -0.659, -0.699, -0.56, -0.576, -0.49, -0.624, -0.417, -0.749, -0.012, 0.326, 0.295, -0.63, -0.333, -0.497, 0.193, 0.247, 1.165, 0.739, -0.213, -0.13, -0.093, 0.59, 0.701, -0.059, 1.178, 0.253, 0.355, 0.418, 0.352, 0.546, 1.124, 0.211, 0.193, 1.058, 0.014, 0.07, 0.29, -0.413, 1.063, 0.204, 0.124, 1.017, 0.776, 0.759, 0.844, 0.953, 0.883, 1.62, 0.735, 2.008, 1.866, 1.468, 1.982], "Gasteiz": [-0.164, -0.307, 0.121, 0.726, -0.218, 0.918, 0.073, 1.144, 0.628, 0.503, 0.54, -0.79, -0.268, -0.566, -0.951, 0.403, -1.453, -0.254, 0.144, 0.508, 0.052, 0.975, -0.063, -0.83, 0.084, -0.41, 0.327, -0.201, 0.153, -0.562, -0.265, -0.63, -1.312, -0.51, -0.609, -0.485, -0.513, -0.46, -0.528, -0.301, -0.666, 0.191, 0.4, 0.319, -0.595, 0.044, -0.153, 0.44, 0.286, 1.186, 0.924, -0.061, -0.07, -0.221, 0.906, 1.029, -0.067, 1.431, 0.42, 0.256, 0.642, 0.535, 0.588, 1.395, 0.417, 0.273, 1.356, 0.205, 0.147, 0.566, -0.264, 1.33, 0.587, 0.172, 1.346, 0.999, 0.927, 0.949, 0.666, 0.884, 1.404, 0.707, 2.124, 2.08, 1.331, 1.828], "Iruña": [-0.143, -0.203, 0.432, 1.037, 0.048, 1.118, 0.285, 1.254, 0.779, 0.758, 0.416, -0.843, -0.217, -0.429, -1.138, 0.471, -1.573, -0.242, 0.111, 0.406, -0.241, 0.775, -0.143, -1.08, 0.074, -0.533, 0.194, -0.199, 0.003, -0.786, -0.394, -0.674, -1.196, -0.474, -0.565, -0.493, -0.543, -0.49, -0.655, -0.423, -0.885, 0.209, 0.322, 0.364, -0.675, -0.112, -0.161, 0.305, 0.316, 1.188, 0.867, -0.069, 0.004, -0.107, 1.073, 0.881, 0.076, 1.346, 0.267, 0.32, 0.706, 0.567, 0.712, 1.41, 0.556, 0.383, 1.424, 0.234, 0.191, 0.837, -0.366, 1.539, 0.719, 0.119, 1.213, 1.034, 0.94, 0.639, 0.677, 0.927, 1.24, 0.657, 2.243, 1.786, 1.119, 1.6], "Maule": [0.062, -0.056, 0.467, 0.947, -0.026, 0.982, 0.164, 1.493, 0.798, 0.807, 0.133, -0.743, -0.249, -0.651, -1.269, 0.309, -1.744, -0.372, 0.091, 0.529, 0.025, 0.934, -0.298, -0.897, -0.056, -0.52, 0.334, -0.291, 0.077, -0.591, -0.388, -0.725, -1.073, -0.7, -0.629, -0.575, -0.514, -0.462, -0.622, -0.415, -0.809, 0.103, 0.476, 0.432, -0.554, -0.115, -0.285, 0.225, 0.245, 1.134, 0.78, -0.222, -0.106, -0.173, 0.844, 0.707, -0.069, 1.285, 0.152, 0.265, 0.574, 0.398, 0.653, 1.295, 0.24, 0.034, 1.228, -0.004, -0.01, 0.606, -0.424, 1.064, 0.32, 0.083, 1.08, 1.032, 0.823, 1.228, 1.581, 1.461, 2.194, 1.337, 2.68, 2.355, 1.806, 2.03]}}, "t": {"clima": {"stop": "Parar", "read": "{y} · {v} respecto a 1940–1970 · {c}"}, "terr": {"Araba": "Araba", "Bizkaia": "Bizkaia", "Gipuzkoa": "Gipuzkoa", "Nafarroa": "Navarra", "Lapurdi": "Lapurdi", "Behe Nafarroa": "Baja Navarra", "Zuberoa": "Zuberoa"}, "map": {"search": "Busca un municipio", "years": "Elección", "turnout": "participación en las europeas de {y}", "pick": "Toca un municipio en el mapa o búscalo arriba.", "nodata": "Sin datos", "nodataWhy": "No hay datos de este municipio en esta elección.", "s1": "La cifra", "s1t": "{v} votantes ÷ {c} en el censo = {p}", "s2": "La tabla", "s2t": "Fila de {name} (código {id}): censo {c} · votantes {v}", "beh": "Verla en el Behatokia", "s3": "El fichero oficial", "hash": "Huella SHA-256", "got": "descargado el {d}", "page": "Página oficial de descarga", "legend": "Participación"}, "agent": {"in": "Lo que recibe", "does": "Lo que hace", "wait": "El agente espera tu decisión", "you": "Tú decides", "reject": "Rechazar", "again": "Volver a empezar", "tasks": [{"tab": "Orientación de empleo", "doc": "CV_ficticio.pdf", "lines": ["Técnica de administración y finanzas", "6 años en una cooperativa industrial", "Euskera C1 · inglés B2", "SAP y Excel avanzado", "Busca: Gipuzkoa, presencial o híbrido"], "steps": [["analizar_cv", "Leo el CV y saco el perfil: administración y finanzas, 6 años, euskera C1."], ["buscar_ofertas", "Busco en tres portales públicos de empleo: 41 ofertas en Gipuzkoa."], ["puntuar_encaje", "Comparo cada oferta con el perfil y descarto 38 que no encajan.", 0], ["preparar_carta", "Preparo un borrador de carta para la primera.", 1]], "out": [{"type": "list", "title": "Las tres que mejor encajan", "items": [["Técnica contable", "Cooperativa industrial · Arrasate", 91], ["Administrativa con perfil de euskera", "Bolsa de trabajo municipal · Tolosa", 84], ["Analista financiera junior", "Ingeniería · Donostia", 77]]}, {"type": "text", "title": "Borrador de carta", "text": "Egun on: me presento a la oferta de técnica contable. Llevo seis años con la contabilidad de una cooperativa industrial, en SAP, y trabajo con normalidad en euskera…"}], "ask": "¿Enviar la candidatura a la cooperativa de Arrasate?", "yes": "Aprobar y enviar", "done": "Aprobado por ti. Ahora sí se enviaría la candidatura (en esta demo no sale nada).", "undone": "Rechazado. No se envía nada, y el agente lo tendrá en cuenta en la próxima búsqueda."}, {"tab": "Ficha de un artista", "doc": "Rider_Itsas_Kolektiboa.pdf", "lines": ["Grupo inventado: Itsas Kolektiboa", "5 músicos y 1 técnico", "Caché: 4.800 € + IVA", "Fecha propuesta: sábado 11 de julio", "Escenario mínimo: 8 × 6 m", "Sonido: 16 canales, 4 monitores", "Llegada 15:00 · prueba de sonido 17:00"], "steps": [["leer_documento", "Leo el PDF de cuatro páginas, también la tabla escaneada."], ["extraer_datos", "Saco los datos que pide la ficha del festival.", 0], ["comprobar", "Lo cruzo con el calendario y con el presupuesto.", 1]], "out": [{"type": "form", "title": "Ficha del artista", "fields": [["Artista", "Itsas Kolektiboa"], ["Personas", "6 (5 músicos y 1 técnico)"], ["Caché", "4.800 € + IVA"], ["Fecha", "Sábado 11 de julio"], ["Escenario", "8 × 6 m"], ["Sonido", "16 canales, 4 monitores"], ["Llegada", "15:00 (prueba a las 17:00)"]]}, {"type": "alert", "text": "El escenario grande está libre ese día, pero el caché supera en 300 € lo previsto para esa franja."}], "ask": "¿Guardar la ficha y reservar el escenario grande?", "yes": "Aprobar y guardar", "done": "Aprobado por ti. Ficha guardada y escenario reservado (en esta demo no se guarda nada).", "undone": "Rechazado. No se guarda nada: puedes corregir la ficha y volver a pedírselo."}, {"tab": "Concursos públicos", "doc": "Vigilancia diaria", "lines": ["Qué busca: servicios de datos, webs y observatorios", "Dónde: Euskal Herria", "Importe: de 5.000 a 60.000 €", "Fuentes: boletines oficiales y plataformas de contratación"], "steps": [["revisar_anuncios", "Reviso los anuncios publicados hoy: 57 nuevos."], ["filtrar", "Descarto 54 que no son de nuestro ámbito."], ["puntuar", "Puntúo los tres que quedan por encaje, importe y plazo.", 0], ["resumir_pliegos", "Resumo los pliegos de los dos primeros.", 1]], "out": [{"type": "list", "title": "Los tres de hoy", "items": [["Observatorio socioeconómico comarcal", "Agencia de desarrollo · 14.500 € · 12 días", 88], ["Portal de datos abiertos", "Ayuntamiento · 9.800 € · 8 días", 81], ["Cuadro de mando de turismo", "Consorcio · 21.000 € · 20 días", 64]]}, {"type": "text", "title": "Resumen de los pliegos", "text": "El primero pide experiencia en observatorios y una entrega en cuatro meses. El segundo, publicar datos abiertos con DCAT-AP y un año de mantenimiento."}], "ask": "¿Añadir los dos primeros al seguimiento y avisar al equipo?", "yes": "Aprobar", "done": "Aprobado por ti. Los dos quedan en seguimiento y el equipo recibe el aviso (en esta demo no se envía nada).", "undone": "Rechazado. No se añade nada; mañana el agente vuelve a mirar."}], "log": "Registro de decisiones", "logEmpty": "Aún no has decidido nada.", "ok": "Aprobado", "ko": "Rechazado", "by": "por ti", "logNote": "Cada decisión queda anotada: qué, cuándo y quién. Es lo que pide el Reglamento europeo de IA en los usos de alto riesgo."}, "um": {"label": "Umbral de aviso", "reset": "Umbral del modelo", "found": "Fallos detectados", "of": "de {n}", "missed": "Se escapan", "false": "Falsas alarmas", "cost": "Coste", "costT": "Coste según el umbral", "x": "Desgaste de la herramienta (minutos)", "y": "Probabilidad de fallo", "alarm": "Avisa", "quiet": "No avisa", "min": "mínimo", "minT": "Con estos costes, el umbral de menor coste es {p}; el del modelo, {m}.", "legend": {"n": "Pieza sin fallo", "tp": "Fallo detectado", "fn": "Fallo que se escapa", "fp": "Falsa alarma"}, "kinds": {"TWF": "desgaste de la herramienta", "HDF": "disipación de calor", "PWF": "potencia", "OSF": "sobreesfuerzo", "RNF": "aleatoria"}, "tip": "{w} min · probabilidad {p}", "cause": "Causa: {k}", "cMiss": "Coste de un fallo que se escapa", "cFalse": "Coste de una falsa alarma", "toMin": "Ir al de menor coste", "model": "modelo"}, "views": {"tabs": {"rank": "Ranking", "scatter": "2019 frente a 2024", "dist": "Distribución", "evo": "Evolución", "table": "Tabla"}, "all": "Todos", "big": "Solo municipios con más de 1.000 personas censadas", "more": "Más participación", "less": "Menos participación", "rankT": "Los 10 municipios con más y con menos participación en {y}", "scatterT": "Cada punto es un municipio. Por encima de la diagonal, votó más gente en 2024 que en 2019.", "x19": "Participación en 2019", "y24": "Participación en 2024", "diag": "igual que en 2019", "distT": "Cada punto es un municipio; la raya, la mediana de cada herrialde.", "median": "mediana", "evoT": "Participación en las europeas desde 1999", "eh": "Euskal Herria", "cols": ["Municipio", "Herrialde", "Censo 2024", "2019", "2024", "Diferencia"], "filter": "Filtrar la tabla", "rows": "{n} municipios", "pts": "{v} p.", "more10": "Ver más"}, "clima2": {"tabs": {"cal": "Calendario", "lines": "Años y tendencia"}, "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"], "short": ["E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], "tip": "{m} de {y} · {v}", "trend": "Media de 10 años", "year": "Año", "legend": "Diferencia con 1940–1970", "city": "Ciudad", "mean": "Media de las siete"}, "crit": {"labels": ["Experiencia", "Idiomas", "Cercanía", "Salario", "Modalidad"], "weight": "Peso", "score": "Puntuación", "from": "De dónde sale", "offers": [["Técnica contable", "Cooperativa industrial · Arrasate"], ["Administrativa con euskera", "Bolsa de trabajo municipal · Tolosa"], ["Analista financiera junior", "Ingeniería · Donostia"], ["Controller de gestión", "Distribución · Bilbo"], ["Técnica de nóminas", "Asesoría · Hernani"], ["Gestora de subvenciones", "Fundación cultural · Iruñea"], ["Contable en remoto", "Empresa tecnológica · 100 % en remoto"], ["Responsable de administración", "Pyme industrial · Beasain"]], "fits": [[90, 80, 70, 60, 40], [60, 100, 85, 50, 30], [50, 70, 90, 75, 80], [85, 60, 35, 90, 60], [70, 75, 95, 55, 50], [65, 85, 30, 60, 90], [55, 40, 100, 70, 100], [95, 70, 75, 85, 20]], "table": "Ver el desglose en una tabla", "total": "Total", "offer": "Oferta"}, "cost": {"per": "consultas al mes", "month": "Al mes", "year": "Al año", "each": "Por consulta", "ref": "Estimación MITÜMI", "x": "Consultas al mes", "y": "Coste al mes", "cent": "{v} céntimos"}, "modelo": {"tabs": {"cm": "Matriz de confusión", "pr": "Precisión y exhaustividad", "roc": "Curva ROC", "kinds": "Tipos de fallo"}, "real": "Real", "pred": "El modelo", "fail": "Fallo", "ok": "Sin fallo", "alarm": "Avisa", "quiet": "No avisa", "tp": "Detectados", "fn": "Se escapan", "fp": "Falsas alarmas", "tn": "Bien, sin aviso", "prec": "Precisión", "rec": "Exhaustividad", "prX": "Exhaustividad: fallos detectados", "prY": "Precisión: alarmas acertadas", "rocX": "Falsas alarmas entre las piezas sin fallo", "rocY": "Fallos detectados", "auc": "Área bajo la curva: {v}", "here": "umbral actual", "none": "sin causa registrada", "kindsT": "Los 68 fallos de la prueba, por causa", "caught": "Detectados", "missed": "Se escapan"}}}</script>
+<script src="../demos.js" defer></script>
 
 </body>
 </html>
